@@ -5,6 +5,21 @@
 #include "Database.h"
 #include <windows.h>
 
+void FindAndPrint(CDatabase & database
+				, const std::string id
+				, const std::string & search)
+{
+	const std::string result = database.Find(id, search);
+	if (result.empty())
+	{
+		std::cout << "Not found " + id + " with name " + search << std::endl;
+	}
+	else
+	{
+		std::cout << result << std::endl;
+	}
+}
+
 int main()
 {
 	SetConsoleOutputCP(1251);
@@ -14,14 +29,18 @@ int main()
 
 	//database.PrintDatabase(std::cout);
 
-	std::cout << database.Find("ФИО", "Богданов Кирилл") << std::endl;
-	std::cout << database.Find("ФИО", "Кузьминых Жанна") << std::endl;
+	FindAndPrint(database, "ФИО", "Богданов Кирилл");
+	FindAndPrint(database, "ФИО", "Кузьминых Жанна");
 	std::cout << std::endl;
-	std::cout << database.Find("Адрес", "Кирова 78") << std::endl;
-	std::cout << database.Find("Адрес", "Ленина 37") << std::endl;
+	FindAndPrint(database, "Адрес", "Кирова 78");
+	FindAndPrint(database, "Адрес", "Ленина 37");
 	std::cout << std::endl;
-	std::cout << database.Find("Телефон", "14-26-51") << std::endl;
-	std::cout << database.Find("Телефон", "21-17-13") << std::endl;
+	FindAndPrint(database, "Телефон", "14-26-51");
+	FindAndPrint(database, "Телефон", "21-17-13");
+	std::cout << std::endl;
+	FindAndPrint(database, "Телефон", "2-17-13");
+	FindAndPrint(database, "Адрес", "Ленина 3");
+	FindAndPrint(database, "ФИиФТ", "Богданов Кирилл");
 
     return 0;
 }

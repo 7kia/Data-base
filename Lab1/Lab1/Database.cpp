@@ -47,6 +47,7 @@ std::string CDatabase::Find(const std::string id, const std::string & search)
 {
 	std::string founded;
 
+	// TODO : fix define incorrect id
 	size_t indexFounded = m_content[id].size();
 	for (size_t index = 0 ; index < m_content[id].size(); ++index)
 	{
@@ -54,6 +55,12 @@ std::string CDatabase::Find(const std::string id, const std::string & search)
 		{
 			indexFounded = index;
 		}
+	}
+
+	// Not found
+	if (indexFounded >= m_content[id].size())
+	{
+		return std::string();
 	}
 
 	for (const auto & id : m_ids)
