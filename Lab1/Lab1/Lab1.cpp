@@ -16,6 +16,12 @@ int main()
 
 	std::cout << database.Find("ÔÈÎ", "Áîãäàíîâ Êèğèëë") << std::endl;
 	std::cout << database.Find("ÔÈÎ", "Êóçüìèíûõ Æàííà") << std::endl;
+	std::cout << std::endl;
+	std::cout << database.Find("Àäğåñ", "Êèğîâà 78") << std::endl;
+	std::cout << database.Find("Àäğåñ", "Ëåíèíà 37") << std::endl;
+	std::cout << std::endl;
+	std::cout << database.Find("Òåëåôîí", "14-26-51") << std::endl;
+	std::cout << database.Find("Òåëåôîí", "21-17-13") << std::endl;
 
     return 0;
 }
