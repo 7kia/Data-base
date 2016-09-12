@@ -12,7 +12,11 @@ int main()
 
 	CDatabase database("base.txt");
 
-	database.PrintDatabase(std::cout);
+	//database.PrintDatabase(std::cout);
+
+	std::cout << database.Find("ÔÈÎ", "Áîãäàíîâ Êèğèëë") << std::endl;
+	std::cout << database.Find("ÔÈÎ", "Êóçüìèíûõ Æàííà") << std::endl;
+
     return 0;
 }
 

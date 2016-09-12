@@ -22,9 +22,12 @@ public:
 // Methods
 public:
 	void							PrintDatabase(std::ostream & str);
+	std::string						Find(const std::string id, const std::string & search);
 private:
 	void							ProcesssFile(std::ifstream & file);
 	std::vector<std::string>		ReadTypeIds(std::ifstream & file);
+
+	std::vector<std::string>		GetIds() const;
 //////////////////////////////////////////////////////////////////////
 // Data
 private:

@@ -30,11 +30,8 @@ CDatabase::CDatabase(const std::string & nameInputFile)
 
 void CDatabase::PrintDatabase(std::ostream & str)
 {
-	std::vector<std::string> ids;
-	for(const auto & pair : m_content)
-	{
-		ids.push_back(pair.first);
-	}
+	std::vector<std::string> ids = GetIds();
+
 	
 	//std::reverse(ids.begin(), ids.end());
 
@@ -48,6 +45,31 @@ void CDatabase::PrintDatabase(std::ostream & str)
 		}
 		str << std::endl;
 	}
+}
+
+std::string CDatabase::Find(const std::string id, const std::string & search)
+{
+	std::string founded;
+	std::vector<std::string> ids = GetIds();
+
+	size_t indexFounded = m_content[id].size();
+	for (size_t index = 0 ; index < m_content[id].size(); ++index)
+	{
+		if (m_content[id][index] == search)
+		{
+			indexFounded = index;
+		}
+	}
+
+	for (const auto & id : ids)
+	{
+		founded += m_content[id][indexFounded];
+		founded += DIVEDE_SEQUENCE;
+	}
+	founded += "\n";
+
+
+	return founded;
 }
 
 void CDatabase::ProcesssFile(std::ifstream & file)
@@ -81,4 +103,14 @@ std::vector<std::string> CDatabase::ReadTypeIds(std::ifstream & file)
 	getline(file, stringFromFile);
 
 	return SplitWords(stringFromFile);
+}
+
+std::vector<std::string> CDatabase::GetIds() const
+{
+	std::vector<std::string> ids;
+	for (const auto & pair : m_content)
+	{
+		ids.push_back(pair.first);
+	}
+	return ids;
 }
