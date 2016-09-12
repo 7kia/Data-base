@@ -25,15 +25,35 @@ CDatabase::CDatabase(const std::string & nameInputFile)
 {
 	CheckAndOpenFileForReading(nameInputFile);
 
-	m_content.insert({ "ID", {}  });
-	m_content.insert({ "Name",{} });
-	m_content.insert({ "Adress",{} });
-
 	ProcesssFile(m_inputFile);
+}
+
+void CDatabase::PrintDatabase(std::ostream & str)
+{
+	std::vector<std::string> ids;
+	for(const auto & pair : m_content)
+	{
+		ids.push_back(pair.first);
+	}
+	
+	//std::reverse(ids.begin(), ids.end());
+
+	size_t sizeBase = m_content[ids[0]].size();
+	for (size_t index = 0; index < sizeBase; ++index)
+	{
+		for (const auto & id : ids)
+		{
+			str << m_content[id][index];
+			str << DIVEDE_SEQUENCE;
+		}
+		str << std::endl;
+	}
 }
 
 void CDatabase::ProcesssFile(std::ifstream & file)
 {
+	const std::vector<std::string> ids = ReadTypeIds(file);
+
 	std::string stringFromFile;
 
 	while (getline(file, stringFromFile))
@@ -46,10 +66,19 @@ void CDatabase::ProcesssFile(std::ifstream & file)
 		}
 
 		size_t index = 0;
-		for (auto & element : m_content)
+		for (const auto & id : ids)
 		{
-			element.second.push_back(words[index++]);
+			m_content[id].push_back(words[index++]);
 		}
 
 	}
+}
+
+std::vector<std::string> CDatabase::ReadTypeIds(std::ifstream & file)
+{
+	std::string stringFromFile;
+
+	getline(file, stringFromFile);
+
+	return SplitWords(stringFromFile);
 }

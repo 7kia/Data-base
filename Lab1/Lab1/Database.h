@@ -21,11 +21,12 @@ public:
 //////////////////////////////////////////////////////////////////////
 // Methods
 public:
-
+	void							PrintDatabase(std::ostream & str);
 private:
-	void ProcesssFile(std::ifstream & file);
+	void							ProcesssFile(std::ifstream & file);
+	std::vector<std::string>		ReadTypeIds(std::ifstream & file);
 //////////////////////////////////////////////////////////////////////
 // Data
 private:
-	std::unordered_multimap<std::string, std::vector<std::string>>	m_content;
+	std::unordered_map<std::string, std::vector<std::string>>	m_content;
 };
