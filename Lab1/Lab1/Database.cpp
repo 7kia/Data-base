@@ -48,27 +48,31 @@ std::string CDatabase::Find(const std::string id, const std::string & search)
 	std::string founded;
 
 	// TODO : fix define incorrect id
-	size_t indexFounded = m_content[id].size();
+	//size_t indexFounded = m_content[id].size();
+	std::vector<size_t> indexesFounded;
 	for (size_t index = 0 ; index < m_content[id].size(); ++index)
 	{
-		if (m_content[id][index] == search)
+		if (m_content[id][index] == search)// TODO : replace algorithm search
 		{
-			indexFounded = index;
+			indexesFounded.push_back(index);
 		}
 	}
 
 	// Not found
-	if (indexFounded >= m_content[id].size())
+	if (indexesFounded.size() == 0)
 	{
 		return std::string();
 	}
 
-	for (const auto & id : m_ids)
+	for (const auto & indexFounded : indexesFounded)
 	{
-		founded += m_content[id][indexFounded];
-		founded += DIVEDE_SEQUENCE;
+		for (const auto & id : m_ids)
+		{
+			founded += m_content[id][indexFounded];
+			founded += DIVEDE_SEQUENCE;
+		}
+		founded += "\n";
 	}
-	founded += "\n";
 
 
 	return founded;
