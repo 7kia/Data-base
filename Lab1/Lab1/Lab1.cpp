@@ -19,17 +19,33 @@ void FindAndPrint(CDatabase & database
 		std::cout << result << std::endl;
 	}
 }
+void FindAndPrint(CDatabase & database
+				, const std::string & whereSearch
+				, const std::string & search
+				, const std::string & idPrintCell)
+{
+	const std::string result = database.FindValueIds(whereSearch, search, idPrintCell);
+	if (result.empty())
+	{
+		std::cout << "Not found " + whereSearch + " with name " + search << std::endl;
+	}
+	else
+	{
+		std::cout << result << std::endl;
+	}
+}
 
 int main()
 {
 	SetConsoleOutputCP(1251);
 	SetConsoleCP(1251);
-
-	CDatabase database("base.txt");
+	// base.txt
+	CDatabase database("db.csv");
 
 	//database.PrintDatabase(std::cout);
 
-	FindAndPrint(database, "ФИО", "Богданов Кирилл");
+	/*
+		FindAndPrint(database, "ФИО", "Богданов Кирилл");
 	FindAndPrint(database, "ФИО", "Кузьминых Жанна");
 	std::cout << std::endl;
 	FindAndPrint(database, "Адрес", "Кирова 78");
@@ -41,6 +57,14 @@ int main()
 	FindAndPrint(database, "Телефон", "2-17-13");
 	FindAndPrint(database, "Адрес", "Ленина 3");
 	FindAndPrint(database, "ФИиФТ", "Богданов Кирилл");
+	*/
+	//FindAndPrint(database, "author", "\"Yaroslav Polyakov\"");
+	std::cout << std::endl;
+	//FindAndPrint(database, "author", "\"Peter Winter-Smith\"");
+	std::cout << std::endl;
+	FindAndPrint(database, "author", "\"Yaroslav Polyakov\"", "id");
+	std::cout << std::endl;
+	FindAndPrint(database, "author", "\"Peter Winter-Smith\"", "id");
 
     return 0;
 }

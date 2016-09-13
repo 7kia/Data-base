@@ -22,11 +22,16 @@ public:
 // Methods
 public:
 	void							PrintDatabase(std::ostream & str);
-	std::string						Find(const std::string id, const std::string & search);
+	std::string						Find(const std::string & id, const std::string & search);
+
+	std::string						FindValueIds(const std::string & whereSearch
+												, const std::string & search
+												, const std::string & idPrintCell);
+
 private:
 	void							ProcesssFile(std::ifstream & file);
 	std::vector<std::string>		ReadTypeIds(std::ifstream & file);
-
+	std::vector<size_t>				FindIds(const std::string & id, const std::string & search);
 //////////////////////////////////////////////////////////////////////
 // Data
 private:
