@@ -155,3 +155,73 @@ std::vector<size_t> CDatabase::FindIds(const std::string & id, const std::string
 
 	return indexesFounded;
 }
+
+/////////////////////////////////////
+// For print result searching
+void FindAndPrint(CDatabase & database
+				, const std::string id
+				, const std::string & search
+				, std::ofstream & stream)
+{
+	const std::string result = database.Find(id, search);
+	if (result.empty())
+	{
+		stream << "Not found " + id + " with name " + search << std::endl;
+	}
+	else
+	{
+		stream << result << std::endl;
+	}
+}
+
+void FindAndPrint(CDatabase & database
+				, const std::string id
+				, const std::string & search
+				, std::ostream & stream)
+{
+	const std::string result = database.Find(id, search);
+	if (result.empty())
+	{
+		stream << "Not found " + id + " with name " + search << std::endl;
+	}
+	else
+	{
+		stream << result << std::endl;
+	}
+}
+
+
+void FindAndPrint(CDatabase & database
+	, const std::string & whereSearch
+	, const std::string & search
+	, const std::string & idPrintCell
+	, std::ofstream & stream)
+{
+	const std::string result = database.FindValueIds(whereSearch, search, idPrintCell);
+	if (result.empty())
+	{
+		stream << "Not found " + whereSearch + " with name " + search << std::endl;
+	}
+	else
+	{
+		stream << result << std::endl;
+	}
+}
+
+// TODO : see can rewrite(see last argument)
+void FindAndPrint(CDatabase & database
+	, const std::string & whereSearch
+	, const std::string & search
+	, const std::string & idPrintCell
+	, std::ostream & stream)
+{
+	const std::string result = database.FindValueIds(whereSearch, search, idPrintCell);
+	if (result.empty())
+	{
+		stream << "Not found " + whereSearch + " with name " + search << std::endl;
+	}
+	else
+	{
+		stream << result << std::endl;
+	}
+}

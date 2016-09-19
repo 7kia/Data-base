@@ -38,3 +38,24 @@ private:
 	std::unordered_map<std::string, std::vector<std::string>>			m_content;
 	std::vector<std::string>											m_ids;
 };
+
+void FindAndPrint(CDatabase & database
+				, const std::string id
+				, const std::string & search
+				, std::ofstream & stream);
+void FindAndPrint(CDatabase & database
+				, const std::string id
+				, const std::string & search
+				, std::ostream & stream);
+
+void FindAndPrint(CDatabase & database
+				, const std::string & whereSearch
+				, const std::string & search
+				, const std::string & idPrintCell
+				, std::ofstream & stream);
+// TODO : see can rewrite(see last argument)
+void FindAndPrint(CDatabase & database
+				, const std::string & whereSearch
+				, const std::string & search
+				, const std::string & idPrintCell
+				, std::ostream & stream);
