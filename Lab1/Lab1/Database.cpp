@@ -75,8 +75,6 @@ std::string CDatabase::FindValueIds(const std::string & whereSearch
 									, const std::string & search
 									, const std::string & idPrintCell)
 {
-	// TODO : fix define incorrect id
-	// size_t indexFounded = m_content[id].size();
 	std::vector<size_t> indexesFounded = FindIds(whereSearch, search);
 
 	// Not found
@@ -94,7 +92,6 @@ std::string CDatabase::FindValueIds(const std::string & whereSearch
 		}
 		founded += m_content[idPrintCell][indexFounded];
 	}
-
 
 	return founded;
 }
@@ -135,12 +132,26 @@ std::vector<std::string> CDatabase::ReadTypeIds(std::ifstream & file)
 std::vector<size_t> CDatabase::FindIds(const std::string & id, const std::string & search)
 {
 	std::vector<size_t> indexesFounded;
-	for (size_t index = 0; index < m_content[id].size(); ++index)
+
+	auto iter = std::find(m_content[id].begin(), m_content[id].end(), search);
+
+	/*
+		for (size_t index = 0; index < m_content[id].size(); ++index)
 	{
 		if (m_content[id][index] == search)// TODO : replace algorithm search
 		{
 			indexesFounded.push_back(index);
 		}
+	}	
+	*/
+
+	while (iter != m_content[id].end())
+	{
+		ptrdiff_t i = iter - m_content[id].begin();
+		indexesFounded.push_back(iter - m_content[id].begin());
+		iter = std::find(++iter, m_content[id].end(), search);
 	}
+
+
 	return indexesFounded;
 }
