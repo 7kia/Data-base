@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.IO;
+using GCW.Entities;
 
 namespace CGW
 {
@@ -83,5 +84,25 @@ namespace CGW
             }
         }
 
+        ////////////////////////////////////////////////
+        /// GetListOf
+        public IEnumerable<CService> GetListOfService(string filter = "", string patternMatching = "", string columnsForSorting = "")
+        {
+            var childrens = new List<CService>();
+            OpenConnection();
+            var request = "SELECT * FROM `услуги` ";
+            /*
+             Add code for filter, patternMatching, columnsForSorting
+             */
+           
+
+            MySqlCommand cmd = new MySqlCommand(request, m_connection);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+                childrens.Add(new CService(reader));
+            CloseConnection();
+            return childrens;
+        }
+        ////////////////////////////////////////////////
     }
 }
