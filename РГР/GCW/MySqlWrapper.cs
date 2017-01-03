@@ -111,7 +111,7 @@ namespace CGW
         {
             var list = new List<CApartments>();
             OpenConnection();
-            var request = "SELECT * FROM `услуги` ";
+            var request = "SELECT * FROM `квартиры` ";
             /*
              Add code for filter, patternMatching, columnsForSorting
              */
@@ -129,7 +129,7 @@ namespace CGW
         {
             var list = new List<CPayment>();
             OpenConnection();
-            var request = "SELECT * FROM `услуги` ";
+            var request = "SELECT * FROM `оплата` ";
             /*
              Add code for filter, patternMatching, columnsForSorting
              */
@@ -147,7 +147,7 @@ namespace CGW
         {
             var list = new List<CRate>();
             OpenConnection();
-            var request = "SELECT * FROM `услуги` ";
+            var request = "SELECT * FROM `тариф` ";
             /*
              Add code for filter, patternMatching, columnsForSorting
              */
@@ -165,7 +165,7 @@ namespace CGW
         {
             var list = new List<CRateOfPayment>();
             OpenConnection();
-            var request = "SELECT * FROM `услуги` ";
+            var request = "SELECT * FROM `тариф в платеже` ";
             /*
              Add code for filter, patternMatching, columnsForSorting
              */
@@ -183,7 +183,7 @@ namespace CGW
         {
             var list = new List<CTypeOfSettlement>();
             OpenConnection();
-            var request = "SELECT * FROM `услуги` ";
+            var request = "SELECT * FROM `тип населённого пункта` ";
             /*
              Add code for filter, patternMatching, columnsForSorting
              */

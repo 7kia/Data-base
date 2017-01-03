@@ -110,36 +110,42 @@
             this.квартирыToolStripMenuItem.Name = "квартирыToolStripMenuItem";
             this.квартирыToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.квартирыToolStripMenuItem.Text = "Квартиры";
+            this.квартирыToolStripMenuItem.Click += new System.EventHandler(this.квартирыToolStripMenuItem_Click);
             // 
             // оплатаToolStripMenuItem
             // 
             this.оплатаToolStripMenuItem.Name = "оплатаToolStripMenuItem";
             this.оплатаToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.оплатаToolStripMenuItem.Text = "Оплата";
+            this.оплатаToolStripMenuItem.Click += new System.EventHandler(this.оплатаToolStripMenuItem_Click);
             // 
             // тарифToolStripMenuItem
             // 
             this.тарифToolStripMenuItem.Name = "тарифToolStripMenuItem";
             this.тарифToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.тарифToolStripMenuItem.Text = "Тариф";
+            this.тарифToolStripMenuItem.Click += new System.EventHandler(this.тарифToolStripMenuItem_Click);
             // 
             // тарифВПлатежеToolStripMenuItem
             // 
             this.тарифВПлатежеToolStripMenuItem.Name = "тарифВПлатежеToolStripMenuItem";
             this.тарифВПлатежеToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.тарифВПлатежеToolStripMenuItem.Text = "Тариф в платеже";
+            this.тарифВПлатежеToolStripMenuItem.Click += new System.EventHandler(this.тарифВПлатежеToolStripMenuItem_Click);
             // 
             // типНаселённогоПунктаToolStripMenuItem
             // 
             this.типНаселённогоПунктаToolStripMenuItem.Name = "типНаселённогоПунктаToolStripMenuItem";
             this.типНаселённогоПунктаToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.типНаселённогоПунктаToolStripMenuItem.Text = "Тип населённого пункта";
+            this.типНаселённогоПунктаToolStripMenuItem.Click += new System.EventHandler(this.типНаселённогоПунктаToolStripMenuItem_Click);
             // 
             // услугиToolStripMenuItem
             // 
             this.услугиToolStripMenuItem.Name = "услугиToolStripMenuItem";
             this.услугиToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.услугиToolStripMenuItem.Text = "Услуги";
+            this.услугиToolStripMenuItem.Click += new System.EventHandler(this.услугиToolStripMenuItem_Click);
             // 
             // AboutToolStripMenuItem
             // 

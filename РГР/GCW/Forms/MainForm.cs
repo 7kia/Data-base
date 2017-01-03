@@ -117,6 +117,68 @@ namespace GCW.Forms
             dataGridView_MainTable.Columns[0].HeaderText = "Id";
             dataGridView_MainTable.Columns[1].HeaderText = "Название";
         }
+
+        ///////////////////////////////////////////////////////////////////
+        /// ToolStripMenuItem_Click
+        private void услугиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (m_currentMainTable == Table.Service)
+                return;
+
+            m_currentMainTable = Table.Service;
+            FillMainTable();
+            FillDependentTable();
+        }
+
+        private void типНаселённогоПунктаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (m_currentMainTable == Table.TypeOfSettlement)
+                return;
+
+            m_currentMainTable = Table.TypeOfSettlement;
+            FillMainTable();
+            FillDependentTable();
+        }
+
+        private void тарифВПлатежеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (m_currentMainTable == Table.RateOfPayment)
+                return;
+
+            m_currentMainTable = Table.RateOfPayment;
+            FillMainTable();
+            FillDependentTable();
+        }
+
+        private void тарифToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (m_currentMainTable == Table.Rate)
+                return;
+
+            m_currentMainTable = Table.Rate;
+            FillMainTable();
+            FillDependentTable();
+        }
+
+        private void оплатаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (m_currentMainTable == Table.Payment)
+                return;
+
+            m_currentMainTable = Table.Payment;
+            FillMainTable();
+            FillDependentTable();
+        }
+
+        private void квартирыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (m_currentMainTable == Table.Apartments)
+                return;
+
+            m_currentMainTable = Table.Apartments;
+            FillMainTable();
+            FillDependentTable();
+        }
         ///////////////////////////////////////////////////////////////////
 
     }
