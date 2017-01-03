@@ -44,8 +44,23 @@ namespace GCW.Forms
         {
             switch (m_currentMainTable)
             {
+                case Table.Apartments:
+                    FillApartmentsTable(m_mySqlWrapper.GetListOfApartments(filter, include, orderBy));
+                    break;
+                case Table.Payment:
+                    FillPaymentTable(m_mySqlWrapper.GetListOfPayment(filter, include, orderBy));
+                    break;
+                case Table.Rate:
+                    FillRateTable(m_mySqlWrapper.GetListOfRate(filter, include, orderBy));
+                    break;
+                case Table.RateOfPayment:
+                    FillRateOfPaymentTable(m_mySqlWrapper.GetListOfRateOfPayment(filter, include, orderBy));
+                    break;
                 case Table.Service:
                     FillServiceTable(m_mySqlWrapper.GetListOfService(filter, include, orderBy));
+                    break;
+                case Table.TypeOfSettlement:
+                    FillTypeOfSettlementTable(m_mySqlWrapper.GetListOfTypeOfSettlement(filter, include, orderBy));
                     break;
             }
         }
@@ -61,6 +76,44 @@ namespace GCW.Forms
         private void FillServiceTable(IEnumerable<CService> service)
         {
             dataGridView_MainTable.DataSource = service;
+            dataGridView_MainTable.Columns[0].HeaderText = "Id";
+            dataGridView_MainTable.Columns[1].HeaderText = "Название";
+        }
+
+        private void FillApartmentsTable(IEnumerable<CApartments> apartments)
+        {
+
+            dataGridView_MainTable.DataSource = apartments;
+            dataGridView_MainTable.Columns[0].HeaderText = "Id";
+            dataGridView_MainTable.Columns[1].HeaderText = "Адрес";
+            dataGridView_MainTable.Columns[2].HeaderText = "Номер платежа";
+        }
+        private void FillPaymentTable(IEnumerable<CPayment> payment)
+        {
+            dataGridView_MainTable.DataSource = payment;
+            dataGridView_MainTable.Columns[0].HeaderText = "Id";
+            dataGridView_MainTable.Columns[1].HeaderText = "Id квартиры";
+            dataGridView_MainTable.Columns[2].HeaderText = "Номер платежа";
+        }
+        private void FillRateTable(IEnumerable<CRate> rate)
+        {
+            dataGridView_MainTable.DataSource = rate;
+            dataGridView_MainTable.Columns[0].HeaderText = "Id";
+            dataGridView_MainTable.Columns[1].HeaderText = "Id услуги";
+            dataGridView_MainTable.Columns[2].HeaderText = "Id типа населённого пункта";
+            dataGridView_MainTable.Columns[3].HeaderText = "Тариф";
+        }
+        private void FillRateOfPaymentTable(IEnumerable<CRateOfPayment> rateOfPayment)
+        {
+            dataGridView_MainTable.DataSource = rateOfPayment;
+            dataGridView_MainTable.Columns[0].HeaderText = "Id";
+            dataGridView_MainTable.Columns[1].HeaderText = "Id тарифа";
+            dataGridView_MainTable.Columns[2].HeaderText = "Id платежа";
+            dataGridView_MainTable.Columns[3].HeaderText = "Оплачено";
+        }
+        private void FillTypeOfSettlementTable(IEnumerable<CTypeOfSettlement> typeOfSettlement)
+        {
+            dataGridView_MainTable.DataSource = typeOfSettlement;
             dataGridView_MainTable.Columns[0].HeaderText = "Id";
             dataGridView_MainTable.Columns[1].HeaderText = "Название";
         }

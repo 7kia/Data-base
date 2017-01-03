@@ -86,9 +86,12 @@ namespace CGW
 
         ////////////////////////////////////////////////
         /// GetListOf
+        /// @filter - ищем это значение
+        /// @patternMatching - строка для сравнения с шаблоном
+        /// @columnsForSorting - столбцы со строками для сортировки(для ORDER BY
         public IEnumerable<CService> GetListOfService(string filter = "", string patternMatching = "", string columnsForSorting = "")
         {
-            var childrens = new List<CService>();
+            var list = new List<CService>();
             OpenConnection();
             var request = "SELECT * FROM `услуги` ";
             /*
@@ -99,9 +102,99 @@ namespace CGW
             MySqlCommand cmd = new MySqlCommand(request, m_connection);
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
-                childrens.Add(new CService(reader));
+                list.Add(new CService(reader));
             CloseConnection();
-            return childrens;
+            return list;
+        }
+
+        public IEnumerable<CApartments> GetListOfApartments(string filter = "", string patternMatching = "", string columnsForSorting = "")
+        {
+            var list = new List<CApartments>();
+            OpenConnection();
+            var request = "SELECT * FROM `услуги` ";
+            /*
+             Add code for filter, patternMatching, columnsForSorting
+             */
+
+
+            MySqlCommand cmd = new MySqlCommand(request, m_connection);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+                list.Add(new CApartments(reader));
+            CloseConnection();
+            return list;
+        }
+
+        public IEnumerable<CPayment> GetListOfPayment(string filter = "", string patternMatching = "", string columnsForSorting = "")
+        {
+            var list = new List<CPayment>();
+            OpenConnection();
+            var request = "SELECT * FROM `услуги` ";
+            /*
+             Add code for filter, patternMatching, columnsForSorting
+             */
+
+
+            MySqlCommand cmd = new MySqlCommand(request, m_connection);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+                list.Add(new CPayment(reader));
+            CloseConnection();
+            return list;
+        }
+
+        public IEnumerable<CRate> GetListOfRate(string filter = "", string patternMatching = "", string columnsForSorting = "")
+        {
+            var list = new List<CRate>();
+            OpenConnection();
+            var request = "SELECT * FROM `услуги` ";
+            /*
+             Add code for filter, patternMatching, columnsForSorting
+             */
+
+
+            MySqlCommand cmd = new MySqlCommand(request, m_connection);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+                list.Add(new CRate(reader));
+            CloseConnection();
+            return list;
+        }
+
+        public IEnumerable<CRateOfPayment> GetListOfRateOfPayment(string filter = "", string patternMatching = "", string columnsForSorting = "")
+        {
+            var list = new List<CRateOfPayment>();
+            OpenConnection();
+            var request = "SELECT * FROM `услуги` ";
+            /*
+             Add code for filter, patternMatching, columnsForSorting
+             */
+
+
+            MySqlCommand cmd = new MySqlCommand(request, m_connection);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+                list.Add(new CRateOfPayment(reader));
+            CloseConnection();
+            return list;
+        }
+
+        public IEnumerable<CTypeOfSettlement> GetListOfTypeOfSettlement(string filter = "", string patternMatching = "", string columnsForSorting = "")
+        {
+            var list = new List<CTypeOfSettlement>();
+            OpenConnection();
+            var request = "SELECT * FROM `услуги` ";
+            /*
+             Add code for filter, patternMatching, columnsForSorting
+             */
+
+
+            MySqlCommand cmd = new MySqlCommand(request, m_connection);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+                list.Add(new CTypeOfSettlement(reader));
+            CloseConnection();
+            return list;
         }
         ////////////////////////////////////////////////
     }
