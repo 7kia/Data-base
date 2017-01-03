@@ -102,7 +102,29 @@ namespace CGW.Forms
 
         private void buttonEnter_Click(object sender, EventArgs e)
         {
-            // TODO : rewrite
+            var login = textBoxLogin.Text;
+            var password = textBoxPassword.Text;
+            textBoxLogin.Text = "";
+            textBoxPassword.Text = "";
+
+            MainForm form;
+            try
+            {
+                var settings = Settings.Instance;
+                settings.Login = login;
+                settings.Password = password;
+                form = new MainForm();
+            }
+            catch (System.Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Execute error");
+                MessageBox.Show("Неверный логин или пароль", "Ошибка");
+                return;
+            }
+            this.Hide();
+            form.ShowDialog();
+
+            Close();
         }
 
        
