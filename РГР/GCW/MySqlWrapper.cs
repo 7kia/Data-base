@@ -279,7 +279,7 @@ namespace CGW
 
         public void UpdateService(CService service)
         {
-            var request = "UPDATE `услуги` SET `Название` = @название WHERE id = @id";
+            var request = "UPDATE `услуги` SET `Название` = @название WHERE `Id услуги` = @id";
             var command = new MySqlCommand(request, m_connection);
 
             command.Parameters.AddRange(new MySqlParameter[]
