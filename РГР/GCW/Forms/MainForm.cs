@@ -195,6 +195,9 @@ namespace GCW.Forms
             switch (m_currentMainTable)
             {
                 case Table.Apartments:
+                    ApartmentForm apartmentForm = new ApartmentForm(dataGridView_MainTable.CurrentRow.DataBoundItem as CApartments);
+                    if (apartmentForm.ShowDialog() == DialogResult.OK)
+                        FillMainTable();
                     break;
                 case Table.Payment:
                     PaymentForm paymentForm = new PaymentForm(dataGridView_MainTable.CurrentRow.DataBoundItem as CPayment);
@@ -229,6 +232,9 @@ namespace GCW.Forms
             switch (m_currentMainTable)
             {
                 case Table.Apartments:
+                    ApartmentForm apartmentForm = new ApartmentForm();
+                    if (apartmentForm.ShowDialog() == DialogResult.OK)
+                        FillMainTable();
                     break;
                 case Table.Payment:
                     PaymentForm paymentForm = new PaymentForm();
@@ -269,6 +275,9 @@ namespace GCW.Forms
             switch (m_currentMainTable)
             {
                 case Table.Apartments:
+                    var recordApartments = dataGridView_MainTable.CurrentRow.DataBoundItem as CApartments;
+                    m_mySqlWrapper.RemoveApartment(recordApartments);
+                    FillMainTable();
                     break;
                 case Table.Payment:
                     var recordPayment = dataGridView_MainTable.CurrentRow.DataBoundItem as CPayment;

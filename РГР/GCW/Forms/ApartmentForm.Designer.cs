@@ -28,27 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxAddress = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.comboBoxPaymentNumber = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // listBox1
+            // textBoxAddress
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(48, 96);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(142, 30);
-            this.listBox1.TabIndex = 0;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(48, 40);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(142, 20);
-            this.textBox1.TabIndex = 1;
+            this.textBoxAddress.Location = new System.Drawing.Point(48, 40);
+            this.textBoxAddress.Name = "textBoxAddress";
+            this.textBoxAddress.Size = new System.Drawing.Size(142, 20);
+            this.textBoxAddress.TabIndex = 1;
             // 
             // label1
             // 
@@ -76,17 +68,27 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "Ok";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // comboBoxPaymentNumber
+            // 
+            this.comboBoxPaymentNumber.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.comboBoxPaymentNumber.FormattingEnabled = true;
+            this.comboBoxPaymentNumber.Location = new System.Drawing.Point(48, 96);
+            this.comboBoxPaymentNumber.Name = "comboBoxPaymentNumber";
+            this.comboBoxPaymentNumber.Size = new System.Drawing.Size(142, 21);
+            this.comboBoxPaymentNumber.TabIndex = 24;
             // 
             // ApartmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(240, 207);
+            this.Controls.Add(this.comboBoxPaymentNumber);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.textBoxAddress);
             this.Name = "ApartmentForm";
             this.Text = "ApartmentForm";
             this.ResumeLayout(false);
@@ -95,11 +97,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxAddress;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox comboBoxPaymentNumber;
     }
 }
