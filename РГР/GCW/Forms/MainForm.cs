@@ -181,34 +181,7 @@ namespace GCW.Forms
         }
 
 
-        private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (dataGridView_MainTable.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Выделите запись для удаления");
-                return;
-            }
-
-            switch (m_currentMainTable)
-            {
-                case Table.Apartments:
-                    break;
-                case Table.Payment:
-                    break;
-                case Table.Rate:
-                    break;
-                case Table.RateOfPayment:
-                    break;
-                case Table.Service:
-                    var record = dataGridView_MainTable.CurrentRow.DataBoundItem as CService;
-                    m_mySqlWrapper.RemoveService(record);
-                    FillMainTable();
-                    break;
-                case Table.TypeOfSettlement:
-                    break;
-            }
-           
-        }
+       
 
         private void изменитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -226,6 +199,9 @@ namespace GCW.Forms
                 case Table.Payment:
                     break;
                 case Table.Rate:
+                    RateForm rateForm = new RateForm(dataGridView_MainTable.CurrentRow.DataBoundItem as CRate);
+                    if (rateForm.ShowDialog() == DialogResult.OK)
+                        FillMainTable();
                     break;
                 case Table.RateOfPayment:
                     RateOfPaymentForm rateOfPaymentFormForm = new RateOfPaymentForm(dataGridView_MainTable.CurrentRow.DataBoundItem as CRateOfPayment);
@@ -254,6 +230,9 @@ namespace GCW.Forms
                 case Table.Payment:
                     break;
                 case Table.Rate:
+                    RateForm rateForm = new RateForm();
+                    if (rateForm.ShowDialog() == DialogResult.OK)
+                        FillMainTable();
                     break;
                 case Table.RateOfPayment:
                     RateOfPaymentForm rateOfPaymentFormForm = new RateOfPaymentForm();
@@ -288,6 +267,9 @@ namespace GCW.Forms
                 case Table.Payment:
                     break;
                 case Table.Rate:
+                    var recordRate = dataGridView_MainTable.CurrentRow.DataBoundItem as CRate;
+                    m_mySqlWrapper.RemoveRate(recordRate);
+                    FillMainTable();
                     break;
                 case Table.RateOfPayment:
                     var recordRateOfPayment = dataGridView_MainTable.CurrentRow.DataBoundItem as CRateOfPayment;

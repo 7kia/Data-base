@@ -56,6 +56,11 @@ namespace GCW.Forms
                 MessageBox.Show("Заполните поле \"Id тарифа\"", "Ошибка");
                 return false;
             }
+            if (comboBoxPayment.Text.Length == 0)
+            {
+                MessageBox.Show("Заполните поле \"Id платежа\"", "Ошибка");
+                return false;
+            }
 
             return true;
         }
