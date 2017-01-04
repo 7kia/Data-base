@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxLogin = new System.Windows.Forms.TextBox();
+            this.textName = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -42,12 +42,12 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Название";
             // 
-            // textBoxLogin
+            // textName
             // 
-            this.textBoxLogin.Location = new System.Drawing.Point(99, 63);
-            this.textBoxLogin.Name = "textBoxLogin";
-            this.textBoxLogin.Size = new System.Drawing.Size(132, 20);
-            this.textBoxLogin.TabIndex = 4;
+            this.textName.Location = new System.Drawing.Point(99, 63);
+            this.textName.Name = "textName";
+            this.textName.Size = new System.Drawing.Size(132, 20);
+            this.textName.TabIndex = 4;
             // 
             // button1
             // 
@@ -57,6 +57,7 @@
             this.button1.TabIndex = 20;
             this.button1.Text = "Ok";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // TypeOfSettlementForm
             // 
@@ -65,7 +66,7 @@
             this.ClientSize = new System.Drawing.Size(334, 153);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxLogin);
+            this.Controls.Add(this.textName);
             this.Name = "TypeOfSettlementForm";
             this.Text = "TypeOfSettlementForm";
             this.ResumeLayout(false);
@@ -76,7 +77,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxLogin;
+        private System.Windows.Forms.TextBox textName;
         private System.Windows.Forms.Button button1;
     }
 }

@@ -30,7 +30,7 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxLogin = new System.Windows.Forms.TextBox();
+            this.textName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -52,12 +52,12 @@
             this.label1.TabIndex = 22;
             this.label1.Text = "Название";
             // 
-            // textBoxLogin
+            // textName
             // 
-            this.textBoxLogin.Location = new System.Drawing.Point(68, 60);
-            this.textBoxLogin.Name = "textBoxLogin";
-            this.textBoxLogin.Size = new System.Drawing.Size(132, 20);
-            this.textBoxLogin.TabIndex = 21;
+            this.textName.Location = new System.Drawing.Point(68, 60);
+            this.textName.Name = "textName";
+            this.textName.Size = new System.Drawing.Size(132, 20);
+            this.textName.TabIndex = 21;
             // 
             // ServiceForm
             // 
@@ -66,7 +66,7 @@
             this.ClientSize = new System.Drawing.Size(284, 143);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxLogin);
+            this.Controls.Add(this.textName);
             this.Name = "ServiceForm";
             this.Text = "ServiceForm";
             this.ResumeLayout(false);
@@ -78,6 +78,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxLogin;
+        private System.Windows.Forms.TextBox textName;
     }
 }

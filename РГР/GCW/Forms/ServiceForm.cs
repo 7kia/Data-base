@@ -33,7 +33,7 @@ namespace GCW.Forms
 
         private void FillFields()
         {
-            textBoxLogin.Text = m_service.Name;
+            textName.Text = m_service.Name;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -41,7 +41,7 @@ namespace GCW.Forms
             if (!CheckFields())
                 return;
 
-            m_service.Name = textBoxLogin.Text;
+            m_service.Name = textName.Text;
 
             if (m_create)
             {
@@ -58,7 +58,7 @@ namespace GCW.Forms
 
         private bool CheckFields()
         {
-            if (textBoxLogin.Text.Length == 0)
+            if (textName.Text.Length == 0)
             {
                 MessageBox.Show("Заполните поле \"Название\"", "Ошибка");
                 return false;

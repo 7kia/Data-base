@@ -230,11 +230,14 @@ namespace GCW.Forms
                 case Table.RateOfPayment:
                     break;
                 case Table.Service:
-                    ServiceForm form = new ServiceForm(dataGridView_MainTable.CurrentRow.DataBoundItem as CService);
-                    if (form.ShowDialog() == DialogResult.OK)
+                    ServiceForm serviceForm = new ServiceForm(dataGridView_MainTable.CurrentRow.DataBoundItem as CService);
+                    if (serviceForm.ShowDialog() == DialogResult.OK)
                         FillMainTable();
                     break;
                 case Table.TypeOfSettlement:
+                    TypeOfSettlementForm typeOfSettlementform = new TypeOfSettlementForm(dataGridView_MainTable.CurrentRow.DataBoundItem as CTypeOfSettlement);
+                    if (typeOfSettlementform.ShowDialog() == DialogResult.OK)
+                        FillMainTable();
                     break;
             }
         }
@@ -252,11 +255,14 @@ namespace GCW.Forms
                 case Table.RateOfPayment:
                     break;
                 case Table.Service:
-                    ServiceForm form = new ServiceForm();
-                    if (form.ShowDialog() == DialogResult.OK)
+                    ServiceForm serviceForm = new ServiceForm();
+                    if (serviceForm.ShowDialog() == DialogResult.OK)
                         FillMainTable();
                     break;
                 case Table.TypeOfSettlement:
+                    TypeOfSettlementForm typeOfSettlementform = new TypeOfSettlementForm();
+                    if (typeOfSettlementform.ShowDialog() == DialogResult.OK)
+                        FillMainTable();
                     break;
             }
         }
@@ -280,11 +286,14 @@ namespace GCW.Forms
                 case Table.RateOfPayment:
                     break;
                 case Table.Service:
-                    var record = dataGridView_MainTable.CurrentRow.DataBoundItem as CService;
-                    m_mySqlWrapper.RemoveService(record);
+                    var recordService = dataGridView_MainTable.CurrentRow.DataBoundItem as CService;
+                    m_mySqlWrapper.RemoveService(recordService);
                     FillMainTable();
                     break;
                 case Table.TypeOfSettlement:
+                    var recordTypeOfSettlement = dataGridView_MainTable.CurrentRow.DataBoundItem as CTypeOfSettlement;
+                    m_mySqlWrapper.RemoveTypeOfSettlement(recordTypeOfSettlement);
+                    FillMainTable();
                     break;
             }
         }

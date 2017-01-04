@@ -265,7 +265,7 @@ namespace CGW
 
         public void UpdateTypeOfSettlement(CTypeOfSettlement typeOfSettlement)
         {
-            var request = "UPDATE `Тип населенного пункта` SET `Название` = @название WHERE id = @id";
+            var request = "UPDATE `тип населённого пункта` SET `Название` = @название WHERE id = @id";
             var command = new MySqlCommand(request, m_connection);
 
             command.Parameters.AddRange(new MySqlParameter[]
@@ -279,7 +279,7 @@ namespace CGW
 
         public void UpdateService(CService service)
         {
-            var request = "UPDATE `услуги` SET `Название` = @название WHERE `Id услуги` = @id";
+            var request = "UPDATE `услуги` SET `Название` = @название WHERE `Id` = @id";
             var command = new MySqlCommand(request, m_connection);
 
             command.Parameters.AddRange(new MySqlParameter[]
@@ -384,7 +384,7 @@ namespace CGW
 
         public void AddTypeOfSettlement(CTypeOfSettlement typeOfSettlement)
         {
-            var request = "INSERT INTO `Тип населенного пункта`" +
+            var request = "INSERT INTO `тип населённого пункта`" +
                "(" +
                "`Название`" +
                ") " +
@@ -465,7 +465,7 @@ namespace CGW
 
         public void RemoveTypeOfSettlement(CTypeOfSettlement typeOfSettlement)
         {
-            var request = "DELETE FROM `Тип населенного пункта` WHERE id = @id";// TODO : see need change regist
+            var request = "DELETE FROM `Тип населённого пункта` WHERE id = @id";// TODO : see need change regist
             var command = new MySqlCommand(request, m_connection);
             command.Parameters.AddRange(new MySqlParameter[]{
                 new MySqlParameter("id", typeOfSettlement.Id)
