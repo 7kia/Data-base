@@ -291,6 +291,137 @@ namespace CGW
             Execute(command);
         }
         ////////////////////////////////////////////////
+        /// Add
+        public void AddApartment(CApartments apartment)
+        {
+            var request = "INSERT INTO `квартиры`" +
+                          "(" +
+                          "`Адрес`, `Номер платежа`" +
+                          ") " +
+                          "VALUES " +
+                          "(" +
+                          "@адрес,@номер" +
+                          ")";
+            var command = new MySqlCommand(request, m_connection);
+
+            command.Parameters.AddRange(new MySqlParameter[]
+            {
+                new MySqlParameter("адрес", apartment.Address),
+                new MySqlParameter("номер", apartment.NumberPayment),
+            }
+            );
+            Execute(command);
+        }
+
+        public void AddPayment(CPayment payment)
+        {
+            var request = "INSERT INTO `оплата`" +
+              "(" +
+              "`Id квартиры`, `Номер платежа`" +
+              ") " +
+              "VALUES " +
+              "(" +
+              "@IdКвартиры,@номер" +
+              ")";
+
+            var command = new MySqlCommand(request, m_connection);
+
+            command.Parameters.AddRange(new MySqlParameter[]
+            {
+                new MySqlParameter("IdКвартиры", payment.IdApartments),
+                new MySqlParameter("номер", payment.NumberPayment),
+            }
+            );
+            Execute(command);
+        }
+
+        public void AddRate(CRate rate)
+        {
+            var request = "INSERT INTO `тариф`" +
+                            "(" +
+                            "`Id услуги`, `Id типа населенного пункта`, `Тариф`" +
+                            ") " +
+                            "VALUES " +
+                            "(" +
+                            "@IdУслуги,@IdПункта,@Тариф" +
+                            ")";
+
+            var command = new MySqlCommand(request, m_connection);
+
+            command.Parameters.AddRange(new MySqlParameter[]
+            {
+                new MySqlParameter("IdУслуги", rate.IdService),
+                new MySqlParameter("IdПункта", rate.IdSettlement),
+                new MySqlParameter("Тариф", rate.Rate),
+            }
+            );
+            Execute(command);
+        }
+
+        public void AddRateOfPayment(CRateOfPayment rateOfPayment)
+        {
+            var request = "INSERT INTO `тариф в платеже`" +
+                "(" +
+                "`Id тарифа`, `Id платежа`, `Оплачено`" +
+                ") " +
+                "VALUES " +
+                "(" +
+                "@IdТарифа,@IdПлатежа,@Оплачено" +
+                ")";
+
+
+            var command = new MySqlCommand(request, m_connection);
+
+            command.Parameters.AddRange(new MySqlParameter[]
+            {
+                new MySqlParameter("IdТарифа", rateOfPayment.IdRate),
+                new MySqlParameter("IdПлатежа", rateOfPayment.IdPayment),
+                new MySqlParameter("Оплачено", rateOfPayment.IsPaid),
+            }
+            );
+            Execute(command);
+        }
+
+        public void AddTypeOfSettlement(CTypeOfSettlement typeOfSettlement)
+        {
+            var request = "INSERT INTO `Тип населенного пункта`" +
+               "(" +
+               "`Название`" +
+               ") " +
+               "VALUES " +
+               "(" +
+               "@название" +
+               ")";
+            var command = new MySqlCommand(request, m_connection);
+
+            command.Parameters.AddRange(new MySqlParameter[]
+            {
+                new MySqlParameter("название", typeOfSettlement.Name),
+            }
+            );
+            Execute(command);
+        }
+
+        public void AddService(CService service)
+        {
+            var request = "INSERT INTO `услуги`" +
+              "(" +
+              "`Название`" +
+              ") " +
+              "VALUES " +
+              "(" +
+              "@название" +
+              ")";
+            var command = new MySqlCommand(request, m_connection);
+
+            command.Parameters.AddRange(new MySqlParameter[]
+            {
+                new MySqlParameter("название", service.Name),
+            }
+            );
+            Execute(command);
+        }
+        ////////////////////////////////////////////////
         private void Execute(MySqlCommand command)
         {
             try
