@@ -422,6 +422,67 @@ namespace CGW
             Execute(command);
         }
         ////////////////////////////////////////////////
+        /// Remove
+        public void RemoveApartment(CApartments apartment)
+        {
+            var request = "DELETE FROM `квартиры` WHERE id = @id";
+            var command = new MySqlCommand(request, m_connection);
+            command.Parameters.AddRange(new MySqlParameter[]{
+                new MySqlParameter("id", apartment.Id)
+            });
+            Execute(command);
+        }
+
+        public void RemovePayment(CPayment payment)
+        {
+            var request = "DELETE FROM `оплата` WHERE id = @id";
+            var command = new MySqlCommand(request, m_connection);
+            command.Parameters.AddRange(new MySqlParameter[]{
+                new MySqlParameter("id", payment.Id)
+            });
+            Execute(command);
+        }
+
+        public void RemoveRate(CRate rate)
+        {
+            var request = "DELETE FROM `тариф` WHERE id = @id";
+            var command = new MySqlCommand(request, m_connection);
+            command.Parameters.AddRange(new MySqlParameter[]{
+                new MySqlParameter("id", rate.Id)
+            });
+            Execute(command);
+        }
+
+        public void RemoveRateOfPayment(CRateOfPayment rateOfPayment)
+        {
+            var request = "DELETE FROM `тариф в платеже` WHERE id = @id";
+            var command = new MySqlCommand(request, m_connection);
+            command.Parameters.AddRange(new MySqlParameter[]{
+                new MySqlParameter("id", rateOfPayment.Id)
+            });
+            Execute(command);
+        }
+
+        public void RemoveTypeOfSettlement(CTypeOfSettlement typeOfSettlement)
+        {
+            var request = "DELETE FROM `Тип населенного пункта` WHERE id = @id";// TODO : see need change regist
+            var command = new MySqlCommand(request, m_connection);
+            command.Parameters.AddRange(new MySqlParameter[]{
+                new MySqlParameter("id", typeOfSettlement.Id)
+            });
+            Execute(command);
+        }
+
+        public void RemoveService(CService service)
+        {
+            var request = "DELETE FROM `услуги` WHERE id = @id";// TODO : see need change regist
+            var command = new MySqlCommand(request, m_connection);
+            command.Parameters.AddRange(new MySqlParameter[]{
+                new MySqlParameter("id", service.Id)
+            });
+            Execute(command);
+        }
+        ////////////////////////////////////////////////
         private void Execute(MySqlCommand command)
         {
             try
