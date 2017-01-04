@@ -86,16 +86,17 @@ namespace CGW
 
         ////////////////////////////////////////////////
         /// GetListOf
+        /// 
         /// @filter - ищем это значение
         /// @patternMatching - строка для сравнения с шаблоном
-        /// @columnsForSorting - столбцы со строками для сортировки(для ORDER BY
-        public IEnumerable<CService> GetListOfService(string filter = "", string patternMatching = "", string columnsForSorting = "")
+        /// @orderBy - столбцы со строками для сортировки(для ORDER BY
+        public IEnumerable<CService> GetListOfService(string filter = "", string patternMatching = "", string orderBy = "")
         {
             var list = new List<CService>();
             OpenConnection();
             var request = "SELECT * FROM `услуги` ";
             /*
-             Add code for filter, patternMatching, columnsForSorting
+             Add code for filter, patternMatching, orderBy
              */
            
 
@@ -107,13 +108,13 @@ namespace CGW
             return list;
         }
 
-        public IEnumerable<CApartments> GetListOfApartments(string filter = "", string patternMatching = "", string columnsForSorting = "")
+        public IEnumerable<CApartments> GetListOfApartments(string filter = "", string patternMatching = "", string orderBy = "")
         {
             var list = new List<CApartments>();
             OpenConnection();
             var request = "SELECT * FROM `квартиры` ";
             /*
-             Add code for filter, patternMatching, columnsForSorting
+             Add code for filter, patternMatching, orderBy
              */
 
 
@@ -125,13 +126,13 @@ namespace CGW
             return list;
         }
 
-        public IEnumerable<CPayment> GetListOfPayment(string filter = "", string patternMatching = "", string columnsForSorting = "")
+        public IEnumerable<CPayment> GetListOfPayment(string filter = "", string patternMatching = "", string orderBy = "")
         {
             var list = new List<CPayment>();
             OpenConnection();
             var request = "SELECT * FROM `оплата` ";
             /*
-             Add code for filter, patternMatching, columnsForSorting
+             Add code for filter, patternMatching, orderBy
              */
 
 
@@ -143,13 +144,13 @@ namespace CGW
             return list;
         }
 
-        public IEnumerable<CRate> GetListOfRate(string filter = "", string patternMatching = "", string columnsForSorting = "")
+        public IEnumerable<CRate> GetListOfRate(string filter = "", string patternMatching = "", string orderBy = "")
         {
             var list = new List<CRate>();
             OpenConnection();
             var request = "SELECT * FROM `тариф` ";
             /*
-             Add code for filter, patternMatching, columnsForSorting
+             Add code for filter, patternMatching, orderBy
              */
 
 
@@ -161,13 +162,13 @@ namespace CGW
             return list;
         }
 
-        public IEnumerable<CRateOfPayment> GetListOfRateOfPayment(string filter = "", string patternMatching = "", string columnsForSorting = "")
+        public IEnumerable<CRateOfPayment> GetListOfRateOfPayment(string filter = "", string patternMatching = "", string orderBy = "")
         {
             var list = new List<CRateOfPayment>();
             OpenConnection();
             var request = "SELECT * FROM `тариф в платеже` ";
             /*
-             Add code for filter, patternMatching, columnsForSorting
+             Add code for filter, patternMatching, orderBy
              */
 
 
@@ -179,13 +180,13 @@ namespace CGW
             return list;
         }
 
-        public IEnumerable<CTypeOfSettlement> GetListOfTypeOfSettlement(string filter = "", string patternMatching = "", string columnsForSorting = "")
+        public IEnumerable<CTypeOfSettlement> GetListOfTypeOfSettlement(string filter = "", string patternMatching = "", string orderBy = "")
         {
             var list = new List<CTypeOfSettlement>();
             OpenConnection();
             var request = "SELECT * FROM `тип населённого пункта` ";
             /*
-             Add code for filter, patternMatching, columnsForSorting
+             Add code for filter, patternMatching, orderBy
              */
 
 
@@ -197,5 +198,117 @@ namespace CGW
             return list;
         }
         ////////////////////////////////////////////////
+        ///  Update
+        public void UpdateApartment(CApartments apartment)
+        {
+            var request = "UPDATE `квартиры` SET `Адрес` = @адрес, `Номер платежа` = @номер WHERE id = @id";
+            var command = new MySqlCommand(request, m_connection);
+
+            command.Parameters.AddRange(new MySqlParameter[]
+            {
+                new MySqlParameter("id", apartment.Id),
+                new MySqlParameter("адрес", apartment.Address),
+                new MySqlParameter("номер", apartment.NumberPayment),
+            }
+            );
+            Execute(command);
+        }
+
+        public void UpdatePayment(CPayment payment)
+        {
+            var request = "UPDATE `оплата` SET `Id квартиры` = @IdКвартиры, `Номер платежа` = @номер WHERE id = @id";
+            var command = new MySqlCommand(request, m_connection);
+
+            command.Parameters.AddRange(new MySqlParameter[]
+            {
+                new MySqlParameter("id", payment.Id),
+                new MySqlParameter("IdКвартиры", payment.IdApartments),
+                new MySqlParameter("номер", payment.NumberPayment),
+            }
+            );
+            Execute(command);
+        }
+
+        public void UpdateRate(CRate rate)
+        {
+            var request = "UPDATE `тариф` SET `Id услуги` = @IdУслуги," +
+                          " `Id типа населенного пункта` = @IdПункта, `Тариф` = @Тариф WHERE id = @id";
+            var command = new MySqlCommand(request, m_connection);
+
+            command.Parameters.AddRange(new MySqlParameter[]
+            {
+                new MySqlParameter("id", rate.Id),
+                new MySqlParameter("IdУслуги", rate.IdService),
+                new MySqlParameter("IdПункта", rate.IdSettlement),
+                new MySqlParameter("Тариф", rate.Rate),
+            }
+            );
+            Execute(command);
+        }
+
+        public void UpdateRateOfPayment(CRateOfPayment rateOfPayment)
+        {
+            var request = "UPDATE `тариф в платеже` SET `Id тарифа` = @IdТарифа," +
+                          " `Id платежа` = @IdПлатежа, `Оплачено` = @Оплачено WHERE id = @id";
+            var command = new MySqlCommand(request, m_connection);
+
+            command.Parameters.AddRange(new MySqlParameter[]
+            {
+                new MySqlParameter("id", rateOfPayment.Id),
+                new MySqlParameter("IdТарифа", rateOfPayment.IdRate),
+                new MySqlParameter("IdПлатежа", rateOfPayment.IdPayment),
+                new MySqlParameter("Оплачено", rateOfPayment.IsPaid),
+            }
+            );
+            Execute(command);
+        }
+
+        public void UpdateTypeOfSettlement(CTypeOfSettlement typeOfSettlement)
+        {
+            var request = "UPDATE `Тип населенного пункта` SET `Название` = @название WHERE id = @id";
+            var command = new MySqlCommand(request, m_connection);
+
+            command.Parameters.AddRange(new MySqlParameter[]
+            {
+                new MySqlParameter("id", typeOfSettlement.Id),
+                new MySqlParameter("название", typeOfSettlement.Name),
+            }
+            );
+            Execute(command);
+        }
+
+        public void UpdateService(CService service)
+        {
+            var request = "UPDATE `услуги` SET `Название` = @название WHERE id = @id";
+            var command = new MySqlCommand(request, m_connection);
+
+            command.Parameters.AddRange(new MySqlParameter[]
+            {
+                new MySqlParameter("id", service.Id),
+                new MySqlParameter("название", service.Name),
+            }
+            );
+            Execute(command);
+        }
+        ////////////////////////////////////////////////
+        private void Execute(MySqlCommand command)
+        {
+            try
+            {
+                OpenConnection();
+                command.Prepare();// Проверка парметров
+                command.ExecuteNonQuery();// выполнение комманды
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e.Message, "Execute error");
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
+            CloseConnection();
+        }
     }
 }

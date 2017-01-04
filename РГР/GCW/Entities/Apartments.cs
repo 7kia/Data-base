@@ -11,18 +11,18 @@ namespace GCW.Entities
         {
             Id = reader.GetUInt32(0);
             Address = reader.GetString(1);
-            IdApartments = reader.GetUInt32(2);
+            NumberPayment = reader.GetUInt32(2);
         }
 
-        public CApartments(string address, uint idApartments)
+        public CApartments(string address, uint numberPayment)
         {
             Address = address;
-            IdApartments = idApartments;
+            NumberPayment = numberPayment;
         }
 
         public uint Id { get; set; }
         public string Address { get; set; }
-        public uint IdApartments { get; set; }
+        public uint NumberPayment { get; set; }
 
     }
 }
