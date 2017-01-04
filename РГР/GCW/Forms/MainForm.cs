@@ -238,6 +238,56 @@ namespace GCW.Forms
                     break;
             }
         }
+
+        private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            switch (m_currentMainTable)
+            {
+                case Table.Apartments:
+                    break;
+                case Table.Payment:
+                    break;
+                case Table.Rate:
+                    break;
+                case Table.RateOfPayment:
+                    break;
+                case Table.Service:
+                    ServiceForm form = new ServiceForm();
+                    if (form.ShowDialog() == DialogResult.OK)
+                        FillMainTable();
+                    break;
+                case Table.TypeOfSettlement:
+                    break;
+            }
+        }
+
+        private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView_MainTable.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Выделите запись для удаления");
+                return;
+            }
+
+            switch (m_currentMainTable)
+            {
+                case Table.Apartments:
+                    break;
+                case Table.Payment:
+                    break;
+                case Table.Rate:
+                    break;
+                case Table.RateOfPayment:
+                    break;
+                case Table.Service:
+                    var record = dataGridView_MainTable.CurrentRow.DataBoundItem as CService;
+                    m_mySqlWrapper.RemoveService(record);
+                    FillMainTable();
+                    break;
+                case Table.TypeOfSettlement:
+                    break;
+            }
+        }
         ///////////////////////////////////////////////////////////////////
 
     }
