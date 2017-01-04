@@ -228,6 +228,9 @@ namespace GCW.Forms
                 case Table.Rate:
                     break;
                 case Table.RateOfPayment:
+                    RateOfPaymentForm rateOfPaymentFormForm = new RateOfPaymentForm(dataGridView_MainTable.CurrentRow.DataBoundItem as CRateOfPayment);
+                    if (rateOfPaymentFormForm.ShowDialog() == DialogResult.OK)
+                        FillMainTable();
                     break;
                 case Table.Service:
                     ServiceForm serviceForm = new ServiceForm(dataGridView_MainTable.CurrentRow.DataBoundItem as CService);
@@ -253,6 +256,9 @@ namespace GCW.Forms
                 case Table.Rate:
                     break;
                 case Table.RateOfPayment:
+                    RateOfPaymentForm rateOfPaymentFormForm = new RateOfPaymentForm();
+                    if (rateOfPaymentFormForm.ShowDialog() == DialogResult.OK)
+                        FillMainTable();
                     break;
                 case Table.Service:
                     ServiceForm serviceForm = new ServiceForm();
@@ -284,6 +290,9 @@ namespace GCW.Forms
                 case Table.Rate:
                     break;
                 case Table.RateOfPayment:
+                    var recordRateOfPayment = dataGridView_MainTable.CurrentRow.DataBoundItem as CRateOfPayment;
+                    m_mySqlWrapper.RemoveRateOfPayment(recordRateOfPayment);
+                    FillMainTable();
                     break;
                 case Table.Service:
                     var recordService = dataGridView_MainTable.CurrentRow.DataBoundItem as CService;

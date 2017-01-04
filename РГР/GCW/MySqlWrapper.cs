@@ -483,6 +483,67 @@ namespace CGW
             Execute(command);
         }
         ////////////////////////////////////////////////
+        public List<string> GetIdList(Table table)
+        {
+            List<string> result = new List<string>();
+
+            switch (table)
+            {
+                case Table.Apartments:
+                    var databaseApartments = GetListOfApartments();
+
+                    foreach (CApartments element in databaseApartments)
+                    {
+                        result.Add(element.Id.ToString());
+                    }
+                    break;
+                case Table.Payment:
+                    var databasePayment = GetListOfPayment();
+
+                    foreach (CPayment element in databasePayment)
+                    {
+                        result.Add(element.Id.ToString());
+                    }
+                    break;
+                case Table.Rate:
+                    var databaseRate = GetListOfRate();
+
+                    foreach (CRate element in databaseRate)
+                    {
+                        result.Add(element.Id.ToString());
+                    }
+                    break;
+                case Table.RateOfPayment:
+                    var databaseRateOfPayment = GetListOfRateOfPayment();
+
+                    foreach (CRateOfPayment element in databaseRateOfPayment)
+                    {
+                        result.Add(element.Id.ToString());
+                    }
+                    break;
+                case Table.TypeOfSettlement:
+                    var databaseTypeOfSettlement = GetListOfTypeOfSettlement();
+
+                    foreach (CTypeOfSettlement element in databaseTypeOfSettlement)
+                    {
+                        result.Add(element.Id.ToString());
+                    }
+                    break;
+                case Table.Service:
+                    var databaseService = GetListOfService();
+
+                    foreach (CService element in databaseService)
+                    {
+                        result.Add(element.Id.ToString());
+                    }
+                    break;
+                default:
+                    break;
+            }
+            
+            return result;
+        }
+
         private void Execute(MySqlCommand command)
         {
             try
