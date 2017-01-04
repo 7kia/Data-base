@@ -7,14 +7,77 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CGW;
+using GCW.Entities;
 
 namespace GCW.Forms
 {
     public partial class PaymentForm : Form
     {
+        private MySqlWrapper m_mySqlWrapper = new MySqlWrapper();
+        private bool m_create = true;
+        private CPayment m_payment;
+
         public PaymentForm()
         {
             InitializeComponent();
+            m_payment = new CPayment();
+            FillFields();
+        }
+        public PaymentForm(CPayment rate)
+        {
+            InitializeComponent();
+            m_payment = rate;
+            m_create = false;
+            FillFields();
+        }
+
+        private void FillFields()
+        {
+            var idRates = m_mySqlWrapper.GetIdList(Table.Apartments);
+            foreach (var element in idRates)
+            {
+                comboBoxApartment.Items.Add(element);
+            }
+
+            textNumber.Text = m_payment.NumberPayment.ToString();
+        }
+
+        private bool CheckFields()
+        {
+            if (comboBoxApartment.Text.Length == 0)
+            {
+                MessageBox.Show("Заполните поле \"Id квартиры\"", "Ошибка");
+                return false;
+            }
+            if (textNumber.Text.Length == 0)
+            {
+                MessageBox.Show("Заполните поле \"Номер платежа\"", "Ошибка");
+                return false;
+            }
+            
+            return true;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (!CheckFields())
+                return;
+
+            m_payment.IdApartments = uint.Parse(comboBoxApartment.Text);
+            m_payment.NumberPayment = uint.Parse(textNumber.Text);
+
+            if (m_create)
+            {
+                m_mySqlWrapper.AddPayment(m_payment);
+            }
+            else
+            {
+                m_mySqlWrapper.UpdatePayment(m_payment);
+            }
+
+            this.DialogResult = DialogResult.OK;
+            Close();
         }
     }
 }

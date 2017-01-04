@@ -197,6 +197,9 @@ namespace GCW.Forms
                 case Table.Apartments:
                     break;
                 case Table.Payment:
+                    PaymentForm paymentForm = new PaymentForm(dataGridView_MainTable.CurrentRow.DataBoundItem as CPayment);
+                    if (paymentForm.ShowDialog() == DialogResult.OK)
+                        FillMainTable();
                     break;
                 case Table.Rate:
                     RateForm rateForm = new RateForm(dataGridView_MainTable.CurrentRow.DataBoundItem as CRate);
@@ -228,6 +231,9 @@ namespace GCW.Forms
                 case Table.Apartments:
                     break;
                 case Table.Payment:
+                    PaymentForm paymentForm = new PaymentForm();
+                    if (paymentForm.ShowDialog() == DialogResult.OK)
+                        FillMainTable();
                     break;
                 case Table.Rate:
                     RateForm rateForm = new RateForm();
@@ -265,6 +271,9 @@ namespace GCW.Forms
                 case Table.Apartments:
                     break;
                 case Table.Payment:
+                    var recordPayment = dataGridView_MainTable.CurrentRow.DataBoundItem as CPayment;
+                    m_mySqlWrapper.RemovePayment(recordPayment);
+                    FillMainTable();
                     break;
                 case Table.Rate:
                     var recordRate = dataGridView_MainTable.CurrentRow.DataBoundItem as CRate;
