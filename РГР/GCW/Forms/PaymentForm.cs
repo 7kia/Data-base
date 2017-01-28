@@ -45,6 +45,11 @@ namespace GCW.Forms
                 MessageBox.Show("Заполните поле \"Номер платежа\"", "Ошибка");
                 return false;
             }
+            if (textNumber.Text.Length != 10)
+            {
+                MessageBox.Show("Длина Номера платежа должна быть равна 10", "Ошибка");
+                return false;
+            }
             uint res;
             if (!uint.TryParse(textNumber.Text, out res))
             {
