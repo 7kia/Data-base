@@ -50,15 +50,6 @@ namespace GCW.Forms
                 return false;
             }
 
-            // TODO : check
-            if (monthCalendar.SelectionStart.Date != monthCalendar.SelectionEnd.Date)
-            {
-                MessageBox.Show("В календаре нужно выбрать только один день", "Ошибка");
-                return false;
-            }
-
-
-
             uint res;
             if (textSum.Text.Length == 0)
             {
@@ -80,7 +71,7 @@ namespace GCW.Forms
                 return;
 
             m_payment.NumberPayment = uint.Parse(textNumber.Text);
-            m_payment.Data = monthCalendar.TodayDate.Date;
+            m_payment.Data = dateTimePicker.Value;
             m_payment.Sum = uint.Parse(textSum.Text);
 
             if (m_create)
@@ -96,9 +87,5 @@ namespace GCW.Forms
             Close();
         }
 
-        private void monthCalendar_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            monthCalendar.TodayDate = monthCalendar.SelectionStart;         
-        }
     }
 }
