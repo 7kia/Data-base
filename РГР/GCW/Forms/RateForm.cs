@@ -34,31 +34,15 @@ namespace GCW.Forms
 
         private void FillFields()
         {
-            var idRates = m_mySqlWrapper.GetIdList(Table.Service);
-            foreach (var element in idRates)
-            {
-                comboBoxService.Items.Add(element);
-            }
-
-            var idPayments = m_mySqlWrapper.GetIdList(Table.TypeOfSettlement);
-            foreach (var element in idPayments)
-            {
-                comboBoxSetlement.Items.Add(element);
-            }
-
+            textBoxNameRate.Text = m_rate.NameRate;
             textBoxRate.Text = m_rate.Rate.ToString();
         }
 
         private bool CheckFields()
         {
-            if (comboBoxService.Text.Length == 0)
+            if (textBoxNameRate.Text.Length == 0)
             {
-                MessageBox.Show("Заполните поле \"Id услуги\"", "Ошибка");
-                return false;
-            }
-            if (comboBoxSetlement.Text.Length == 0)
-            {
-                MessageBox.Show("Заполните поле \"Id тип населённого пункта\"", "Ошибка");
+                MessageBox.Show("Заполните поле \"Название тарифа\"", "Ошибка");
                 return false;
             }
             if (textBoxRate.Text.Length == 0)
@@ -75,8 +59,7 @@ namespace GCW.Forms
             if (!CheckFields())
                 return;
 
-            m_rate.IdService = uint.Parse(comboBoxService.Text);
-            m_rate.IdSettlement = uint.Parse(comboBoxSetlement.Text);
+            m_rate.NameRate = textBoxNameRate.Text;
             m_rate.Rate = uint.Parse(textBoxRate.Text);
 
             if (m_create)

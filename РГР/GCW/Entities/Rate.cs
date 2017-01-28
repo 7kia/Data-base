@@ -10,21 +10,18 @@ namespace GCW.Entities
         public CRate(MySqlDataReader reader)
         {
             Id = reader.GetUInt32(0);
-            IdService = reader.GetUInt32(1);
-            IdSettlement = reader.GetUInt32(2);
-            Rate = reader.GetUInt32(3);
+            NameRate = reader.GetString(1);
+            Rate = reader.GetUInt32(2);
         }
 
-        public CRate(uint idService, uint idSettlement, uint rate)
+        public CRate(string nameRate, uint rate)
         {
-            IdService = idService;
-            IdSettlement = idSettlement;
+            NameRate = nameRate;
             Rate = rate;
         }
 
         public uint Id { get; set; }
-        public uint IdService { get; set; }
-        public uint IdSettlement { get; set; }
+        public string NameRate { get; set; }
         public uint Rate { get; set; }
 
     }

@@ -216,14 +216,15 @@ namespace CGW
 
         public void UpdatePayment(CPayment payment)
         {
-            var request = "UPDATE `оплата` SET `Id квартиры` = @IdКвартиры, `Номер платежа` = @номер WHERE id = @id";
+            var request = "UPDATE `оплата` SET `Номер платежа` = @номер," +
+               " `Дата` = @дата, `Сумма` = @сумма WHERE id = @id";
             var command = new MySqlCommand(request, m_connection);
 
             command.Parameters.AddRange(new MySqlParameter[]
             {
-                new MySqlParameter("id", payment.Id),
-                new MySqlParameter("IdКвартиры", payment.IdApartments),
                 new MySqlParameter("номер", payment.NumberPayment),
+                new MySqlParameter("дата", payment.Data),
+                new MySqlParameter("сумма", payment.Sum),
             }
             );
             Execute(command);
@@ -231,15 +232,14 @@ namespace CGW
 
         public void UpdateRate(CRate rate)
         {
-            var request = "UPDATE `тариф` SET `Id услуги` = @IdУслуги," +
-                          " `Id типа населенного пункта` = @IdПункта, `Тариф` = @Тариф WHERE id = @id";
+            var request = "UPDATE `тариф` SET `Название тарифа` = @названиеТарифа," +
+                "`Тариф` = @Тариф WHERE id = @id";
             var command = new MySqlCommand(request, m_connection);
 
             command.Parameters.AddRange(new MySqlParameter[]
             {
                 new MySqlParameter("id", rate.Id),
-                new MySqlParameter("IdУслуги", rate.IdService),
-                new MySqlParameter("IdПункта", rate.IdSettlement),
+                new MySqlParameter("названиеТарифа", rate.NameRate),
                 new MySqlParameter("Тариф", rate.Rate),
             }
             );
@@ -351,8 +351,7 @@ namespace CGW
 
             command.Parameters.AddRange(new MySqlParameter[]
             {
-                new MySqlParameter("IdУслуги", rate.IdService),
-                new MySqlParameter("IdПункта", rate.IdSettlement),
+                new MySqlParameter("названиеТарифа", rate.NameRate),
                 new MySqlParameter("Тариф", rate.Rate),
             }
             );
