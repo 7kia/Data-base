@@ -34,7 +34,7 @@ namespace GCW.Forms
 
         private void FillFields()
         {
-            var idPaymentNumber = m_mySqlWrapper.GetNumberPaymentList();
+            var idPaymentNumber = m_mySqlWrapper.GetNumberPaymentAsStringList();
             foreach (var element in idPaymentNumber)
             {
                 comboBoxPaymentNumber.Items.Add(element);
@@ -50,9 +50,24 @@ namespace GCW.Forms
                 MessageBox.Show("Заполните поле \"Адрес\"", "Ошибка");
                 return false;
             }
+
             if (comboBoxPaymentNumber.Text.Length == 0)
             {
                 MessageBox.Show("Заполните поле \"Номер платежа\"", "Ошибка");
+                return false;
+            }
+
+            // Проверка : введен ли один из существующих номеров
+            var idPaymentNumber = m_mySqlWrapper.GetNumberPaymentAsStringList();
+            if (!idPaymentNumber.Contains(comboBoxPaymentNumber.Text))
+            {
+                MessageBox.Show("В поле \"Номер платежа\" должен быть один вариант из существующих номеров", "Ошибка");
+                return false;
+            }
+            uint res;
+            if (!uint.TryParse(comboBoxPaymentNumber.Text, out res))
+            {
+                MessageBox.Show("В поле \"Номер платежа\" должно быть положительное целое число", "Ошибка");
                 return false;
             }
 

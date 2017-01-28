@@ -45,6 +45,13 @@ namespace GCW.Forms
                 MessageBox.Show("Заполните поле \"Название тарифа\"", "Ошибка");
                 return false;
             }
+
+            uint res;
+            if (!uint.TryParse(textBoxRate.Text, out res))
+            {
+                MessageBox.Show("В поле \"Тариф\" должно быть положительное целое число", "Ошибка");
+                return false;
+            }
             if (textBoxRate.Text.Length == 0)
             {
                 MessageBox.Show("Заполните поле \"Тариф\"", "Ошибка");

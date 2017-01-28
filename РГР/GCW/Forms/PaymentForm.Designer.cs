@@ -93,6 +93,7 @@
             this.monthCalendar.Location = new System.Drawing.Point(174, 38);
             this.monthCalendar.Name = "monthCalendar";
             this.monthCalendar.TabIndex = 33;
+            this.monthCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_DateChanged);
             // 
             // PaymentForm
             // 

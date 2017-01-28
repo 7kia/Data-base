@@ -55,12 +55,35 @@ namespace GCW.Forms
                 MessageBox.Show("Заполните поле \"Id квартиры\"", "Ошибка");
                 return false;
             }
+            var idApartments = m_mySqlWrapper.GetIdList(Table.Apartments);
+            if (!idApartments.Contains(comboBoxIdApartment.Text))
+            {
+                MessageBox.Show("В поле \"Id квартиры\" должен быть один вариант из существующих индексов", "Ошибка");
+                return false;
+            }
+            uint res;
+            if(!uint.TryParse(comboBoxIdApartment.Text, out res))
+            {
+                MessageBox.Show("В поле \"Id квартиры\" должно быть положительное целое число", "Ошибка");
+                return false;
+            }
+
             if (comboBoxIdService.Text.Length == 0)
             {
                 MessageBox.Show("Заполните поле \"Id услуги\"", "Ошибка");
                 return false;
             }
-
+            var idService = m_mySqlWrapper.GetIdList(Table.Rate);
+            if (!idService.Contains(comboBoxIdService.Text))
+            {
+                MessageBox.Show("В поле \"Id квартиры\" должен быть один вариант из существующих индексов", "Ошибка");
+                return false;
+            }
+            if (!uint.TryParse(comboBoxIdService.Text, out res))
+            {
+                MessageBox.Show("В поле \"Id квартиры\" должно быть положительное целое число", "Ошибка");
+                return false;
+            }
             return true;
         }
 

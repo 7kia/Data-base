@@ -45,15 +45,21 @@ namespace GCW.Forms
                 MessageBox.Show("Заполните поле \"Номер платежа\"", "Ошибка");
                 return false;
             }
-
-            /*// TODO : check data
-                          if (monthCalendar.TodayDate. == 0)
+            uint res;
+            if (!uint.TryParse(textNumber.Text, out res))
             {
-                MessageBox.Show("Заполните поле \"Номер платежа\"", "Ошибка");
+                MessageBox.Show("В поле \"Номер платежа\" должно быть положительное целое число", "Ошибка");
                 return false;
             }
 
-             */
+            // TODO : check
+            if (monthCalendar.SelectionStart.Date != monthCalendar.SelectionEnd.Date)
+            {
+                MessageBox.Show("В календаре нужно выбрать только один день", "Ошибка");
+                return false;
+            }
+             
+           
 
 
             if (textSum.Text.Length == 0)
@@ -61,7 +67,12 @@ namespace GCW.Forms
                 MessageBox.Show("Заполните поле \"Сумма\"", "Ошибка");
                 return false;
             }
-            
+            if (!uint.TryParse(textSum.Text, out res))
+            {
+                MessageBox.Show("В поле \"Сумма\" должно быть положительное целое число", "Ошибка");
+                return false;
+            }
+
             return true;
         }
 
@@ -87,5 +98,9 @@ namespace GCW.Forms
             Close();
         }
 
+        private void monthCalendar_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            monthCalendar.TodayDate = monthCalendar.SelectionStart;         
+        }
     }
 }

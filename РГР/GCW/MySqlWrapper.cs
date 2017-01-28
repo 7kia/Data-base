@@ -423,7 +423,7 @@ namespace CGW
             return result;
         }
 
-        public List<string> GetNumberPaymentList()
+        public List<string> GetNumberPaymentAsStringList()
         {
             List<string> result = new List<string>();
             var databasePayment = GetListOfPayment();
@@ -436,6 +436,18 @@ namespace CGW
             return result;
         }
 
+        public List<uint> GetNumberPaymentList()
+        {
+            List<uint> result = new List<uint>();
+            var databasePayment = GetListOfPayment();
+
+            foreach (CPayment element in databasePayment)
+            {
+                result.Add(element.NumberPayment);
+            }
+
+            return result;
+        }
 
         private void Execute(MySqlCommand command)
         {
