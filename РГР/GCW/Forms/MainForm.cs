@@ -29,7 +29,7 @@ namespace GCW.Forms
         private void InitializeMainForm()
         {
             m_mySqlWrapper = new MySqlWrapper();
-            m_currentMainTable = Table.Service;// TODO : rewrite, must be other
+            m_currentMainTable = Table.Apartments;// TODO : rewrite, must be other
 
             // initialize context menu
             dataGridView_MainTable.ContextMenuStrip = contextMenuStrip;
@@ -52,14 +52,8 @@ namespace GCW.Forms
                 case Table.Rate:
                     FillRateTable(m_mySqlWrapper.GetListOfRate(filter, include, orderBy));
                     break;
-                case Table.RateOfPayment:
+                case Table.ServiceToApartment:
                     FillRateOfPaymentTable(m_mySqlWrapper.GetListOfRateOfPayment(filter, include, orderBy));
-                    break;
-                case Table.Service:
-                    FillServiceTable(m_mySqlWrapper.GetListOfService(filter, include, orderBy));
-                    break;
-                case Table.TypeOfSettlement:
-                    FillTypeOfSettlementTable(m_mySqlWrapper.GetListOfTypeOfSettlement(filter, include, orderBy));
                     break;
             }
         }
@@ -93,22 +87,22 @@ namespace GCW.Forms
             dataGridView_MainTable.Columns[0].HeaderText = "Id";
             dataGridView_MainTable.Columns[1].HeaderText = "Id квартиры";
             dataGridView_MainTable.Columns[2].HeaderText = "Номер платежа";
+            dataGridView_MainTable.Columns[3].HeaderText = "Сумма";
+
         }
         private void FillRateTable(IEnumerable<CRate> rate)
         {
             dataGridView_MainTable.DataSource = rate;
             dataGridView_MainTable.Columns[0].HeaderText = "Id";
-            dataGridView_MainTable.Columns[1].HeaderText = "Id услуги";
-            dataGridView_MainTable.Columns[2].HeaderText = "Id типа населённого пункта";
-            dataGridView_MainTable.Columns[3].HeaderText = "Тариф";
+            dataGridView_MainTable.Columns[1].HeaderText = "Название тарифа";
+            dataGridView_MainTable.Columns[2].HeaderText = "Тариф";
         }
-        private void FillRateOfPaymentTable(IEnumerable<CRateOfPayment> rateOfPayment)
+        private void FillRateOfPaymentTable(IEnumerable<CServiceToApartment> rateOfPayment)
         {
             dataGridView_MainTable.DataSource = rateOfPayment;
             dataGridView_MainTable.Columns[0].HeaderText = "Id";
-            dataGridView_MainTable.Columns[1].HeaderText = "Id тарифа";
-            dataGridView_MainTable.Columns[2].HeaderText = "Id платежа";
-            dataGridView_MainTable.Columns[3].HeaderText = "Оплачено";
+            dataGridView_MainTable.Columns[1].HeaderText = "Id квартиры";
+            dataGridView_MainTable.Columns[2].HeaderText = "Id услуги";
         }
         private void FillTypeOfSettlementTable(IEnumerable<CTypeOfSettlement> typeOfSettlement)
         {
@@ -119,37 +113,17 @@ namespace GCW.Forms
 
         ///////////////////////////////////////////////////////////////////
         /// ToolStripMenuItem_Click
-        private void услугиToolStripMenuItem_Click(object sender, EventArgs e)
+        private void услугиВКвартиреToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (m_currentMainTable == Table.Service)
+            if (m_currentMainTable == Table.ServiceToApartment)
                 return;
 
-            m_currentMainTable = Table.Service;
+            m_currentMainTable = Table.ServiceToApartment;
             FillMainTable();
             FillDependentTable();
         }
 
-        private void типНаселённогоПунктаToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (m_currentMainTable == Table.TypeOfSettlement)
-                return;
-
-            m_currentMainTable = Table.TypeOfSettlement;
-            FillMainTable();
-            FillDependentTable();
-        }
-
-        private void тарифВПлатежеToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (m_currentMainTable == Table.RateOfPayment)
-                return;
-
-            m_currentMainTable = Table.RateOfPayment;
-            FillMainTable();
-            FillDependentTable();
-        }
-
-        private void тарифToolStripMenuItem_Click(object sender, EventArgs e)
+        private void тарифУслугToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (m_currentMainTable == Table.Rate)
                 return;
@@ -208,19 +182,9 @@ namespace GCW.Forms
                     if (rateForm.ShowDialog() == DialogResult.OK)
                         FillMainTable();
                     break;
-                case Table.RateOfPayment:
-                    RateOfPaymentForm rateOfPaymentFormForm = new RateOfPaymentForm(dataGridView_MainTable.CurrentRow.DataBoundItem as CRateOfPayment);
+                case Table.ServiceToApartment:
+                    ServiceToApartment rateOfPaymentFormForm = new ServiceToApartment(dataGridView_MainTable.CurrentRow.DataBoundItem as CServiceToApartment);
                     if (rateOfPaymentFormForm.ShowDialog() == DialogResult.OK)
-                        FillMainTable();
-                    break;
-                case Table.Service:
-                    ServiceForm serviceForm = new ServiceForm(dataGridView_MainTable.CurrentRow.DataBoundItem as CService);
-                    if (serviceForm.ShowDialog() == DialogResult.OK)
-                        FillMainTable();
-                    break;
-                case Table.TypeOfSettlement:
-                    TypeOfSettlementForm typeOfSettlementform = new TypeOfSettlementForm(dataGridView_MainTable.CurrentRow.DataBoundItem as CTypeOfSettlement);
-                    if (typeOfSettlementform.ShowDialog() == DialogResult.OK)
                         FillMainTable();
                     break;
             }
@@ -245,21 +209,12 @@ namespace GCW.Forms
                     if (rateForm.ShowDialog() == DialogResult.OK)
                         FillMainTable();
                     break;
-                case Table.RateOfPayment:
-                    RateOfPaymentForm rateOfPaymentFormForm = new RateOfPaymentForm();
+                case Table.ServiceToApartment:
+                    ServiceToApartment rateOfPaymentFormForm = new ServiceToApartment();
                     if (rateOfPaymentFormForm.ShowDialog() == DialogResult.OK)
                         FillMainTable();
                     break;
-                case Table.Service:
-                    ServiceForm serviceForm = new ServiceForm();
-                    if (serviceForm.ShowDialog() == DialogResult.OK)
-                        FillMainTable();
-                    break;
-                case Table.TypeOfSettlement:
-                    TypeOfSettlementForm typeOfSettlementform = new TypeOfSettlementForm();
-                    if (typeOfSettlementform.ShowDialog() == DialogResult.OK)
-                        FillMainTable();
-                    break;
+
             }
         }
 
@@ -288,19 +243,9 @@ namespace GCW.Forms
                     m_mySqlWrapper.RemoveRate(recordRate);
                     FillMainTable();
                     break;
-                case Table.RateOfPayment:
-                    var recordRateOfPayment = dataGridView_MainTable.CurrentRow.DataBoundItem as CRateOfPayment;
+                case Table.ServiceToApartment:
+                    var recordRateOfPayment = dataGridView_MainTable.CurrentRow.DataBoundItem as CServiceToApartment;
                     m_mySqlWrapper.RemoveRateOfPayment(recordRateOfPayment);
-                    FillMainTable();
-                    break;
-                case Table.Service:
-                    var recordService = dataGridView_MainTable.CurrentRow.DataBoundItem as CService;
-                    m_mySqlWrapper.RemoveService(recordService);
-                    FillMainTable();
-                    break;
-                case Table.TypeOfSettlement:
-                    var recordTypeOfSettlement = dataGridView_MainTable.CurrentRow.DataBoundItem as CTypeOfSettlement;
-                    m_mySqlWrapper.RemoveTypeOfSettlement(recordTypeOfSettlement);
                     FillMainTable();
                     break;
             }

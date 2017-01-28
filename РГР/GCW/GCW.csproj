@@ -100,23 +100,11 @@
     <Compile Include="Forms\RateForm.Designer.cs">
       <DependentUpon>RateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RateOfPaymentForm.cs">
+    <Compile Include="Forms\ServiceToApartment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RateOfPaymentForm.Designer.cs">
-      <DependentUpon>RateOfPaymentForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ServiceForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ServiceForm.Designer.cs">
-      <DependentUpon>ServiceForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\TypeOfSettlementForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\TypeOfSettlementForm.Designer.cs">
-      <DependentUpon>TypeOfSettlementForm.cs</DependentUpon>
+    <Compile Include="Forms\ServiceToApartment.Designer.cs">
+      <DependentUpon>ServiceToApartment.cs</DependentUpon>
     </Compile>
     <Compile Include="MySqlWrapper.cs" />
     <Compile Include="Program.cs" />
@@ -137,14 +125,8 @@
     <EmbeddedResource Include="Forms\RateForm.resx">
       <DependentUpon>RateForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RateOfPaymentForm.resx">
-      <DependentUpon>RateOfPaymentForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ServiceForm.resx">
-      <DependentUpon>ServiceForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TypeOfSettlementForm.resx">
-      <DependentUpon>TypeOfSettlementForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ServiceToApartment.resx">
+      <DependentUpon>ServiceToApartment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

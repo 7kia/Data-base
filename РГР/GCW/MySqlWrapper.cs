@@ -15,9 +15,7 @@ namespace CGW
         Apartments
         , Payment
         , Rate
-        , RateOfPayment
-        , TypeOfSettlement
-        , Service
+        , ServiceToApartment
     };
     
     public class MySqlWrapper : IDisposable
@@ -148,7 +146,7 @@ namespace CGW
         {
             var list = new List<CRate>();
             OpenConnection();
-            var request = "SELECT * FROM `тариф` ";
+            var request = "SELECT * FROM `тарифы услуг` ";
             /*
              Add code for filter, patternMatching, orderBy
              */
@@ -162,11 +160,11 @@ namespace CGW
             return list;
         }
 
-        public IEnumerable<CRateOfPayment> GetListOfRateOfPayment(string filter = "", string patternMatching = "", string orderBy = "")
+        public IEnumerable<CServiceToApartment> GetListOfRateOfPayment(string filter = "", string patternMatching = "", string orderBy = "")
         {
-            var list = new List<CRateOfPayment>();
+            var list = new List<CServiceToApartment>();
             OpenConnection();
-            var request = "SELECT * FROM `тариф в платеже` ";
+            var request = "SELECT * FROM `услуги в квартире` ";
             /*
              Add code for filter, patternMatching, orderBy
              */
@@ -175,7 +173,7 @@ namespace CGW
             MySqlCommand cmd = new MySqlCommand(request, m_connection);
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
-                list.Add(new CRateOfPayment(reader));
+                list.Add(new CServiceToApartment(reader));
             CloseConnection();
             return list;
         }
@@ -246,50 +244,22 @@ namespace CGW
             Execute(command);
         }
 
-        public void UpdateRateOfPayment(CRateOfPayment rateOfPayment)
+        public void UpdateServiceToApartment(CServiceToApartment rateOfPayment)
         {
-            var request = "UPDATE `тариф в платеже` SET `Id тарифа` = @IdТарифа," +
-                          " `Id платежа` = @IdПлатежа, `Оплачено` = @Оплачено WHERE id = @id";
+            var request = "UPDATE `тарифы услуг` SET " +
+                          " `Id квартиры` = @Idквартиры, `Id услуги` = @Idуслуги WHERE id = @id";
             var command = new MySqlCommand(request, m_connection);
 
             command.Parameters.AddRange(new MySqlParameter[]
             {
                 new MySqlParameter("id", rateOfPayment.Id),
-                new MySqlParameter("IdТарифа", rateOfPayment.IdRate),
-                new MySqlParameter("IdПлатежа", rateOfPayment.IdPayment),
-                new MySqlParameter("Оплачено", rateOfPayment.IsPaid),
+                new MySqlParameter("Idквартиры", rateOfPayment.IdApartment),
+                new MySqlParameter("Idуслуги", rateOfPayment.IdService),
             }
             );
             Execute(command);
         }
 
-        public void UpdateTypeOfSettlement(CTypeOfSettlement typeOfSettlement)
-        {
-            var request = "UPDATE `тип населённого пункта` SET `Название` = @название WHERE id = @id";
-            var command = new MySqlCommand(request, m_connection);
-
-            command.Parameters.AddRange(new MySqlParameter[]
-            {
-                new MySqlParameter("id", typeOfSettlement.Id),
-                new MySqlParameter("название", typeOfSettlement.Name),
-            }
-            );
-            Execute(command);
-        }
-
-        public void UpdateService(CService service)
-        {
-            var request = "UPDATE `услуги` SET `Название` = @название WHERE `Id` = @id";
-            var command = new MySqlCommand(request, m_connection);
-
-            command.Parameters.AddRange(new MySqlParameter[]
-            {
-                new MySqlParameter("id", service.Id),
-                new MySqlParameter("название", service.Name),
-            }
-            );
-            Execute(command);
-        }
         ////////////////////////////////////////////////
         /// Add
         public void AddApartment(CApartments apartment)
@@ -358,11 +328,11 @@ namespace CGW
             Execute(command);
         }
 
-        public void AddRateOfPayment(CRateOfPayment rateOfPayment)
+        public void AddServiceToApartment(CServiceToApartment rateOfPayment)
         {
-            var request = "INSERT INTO `тариф в платеже`" +
+            var request = "INSERT INTO `тарифы услуг`" +
                 "(" +
-                "`Id тарифа`, `Id платежа`, `Оплачено`" +
+                "`Id квартиры`, `Id услуги`" +
                 ") " +
                 "VALUES " +
                 "(" +
@@ -374,53 +344,13 @@ namespace CGW
 
             command.Parameters.AddRange(new MySqlParameter[]
             {
-                new MySqlParameter("IdТарифа", rateOfPayment.IdRate),
-                new MySqlParameter("IdПлатежа", rateOfPayment.IdPayment),
-                new MySqlParameter("Оплачено", rateOfPayment.IsPaid),
+                new MySqlParameter("Idквартиры", rateOfPayment.IdApartment),
+                new MySqlParameter("Idуслуги", rateOfPayment.IdService),
             }
             );
             Execute(command);
         }
 
-        public void AddTypeOfSettlement(CTypeOfSettlement typeOfSettlement)
-        {
-            var request = "INSERT INTO `тип населённого пункта`" +
-               "(" +
-               "`Название`" +
-               ") " +
-               "VALUES " +
-               "(" +
-               "@название" +
-               ")";
-            var command = new MySqlCommand(request, m_connection);
-
-            command.Parameters.AddRange(new MySqlParameter[]
-            {
-                new MySqlParameter("название", typeOfSettlement.Name),
-            }
-            );
-            Execute(command);
-        }
-
-        public void AddService(CService service)
-        {
-            var request = "INSERT INTO `услуги`" +
-              "(" +
-              "`Название`" +
-              ") " +
-              "VALUES " +
-              "(" +
-              "@название" +
-              ")";
-            var command = new MySqlCommand(request, m_connection);
-
-            command.Parameters.AddRange(new MySqlParameter[]
-            {
-                new MySqlParameter("название", service.Name),
-            }
-            );
-            Execute(command);
-        }
         ////////////////////////////////////////////////
         /// Remove
         public void RemoveApartment(CApartments apartment)
@@ -453,35 +383,16 @@ namespace CGW
             Execute(command);
         }
 
-        public void RemoveRateOfPayment(CRateOfPayment rateOfPayment)
+        public void RemoveRateOfPayment(CServiceToApartment serviceToApartment)
         {
-            var request = "DELETE FROM `тариф в платеже` WHERE id = @id";
+            var request = "DELETE FROM `тарифы услуг` WHERE id = @id";
             var command = new MySqlCommand(request, m_connection);
             command.Parameters.AddRange(new MySqlParameter[]{
-                new MySqlParameter("id", rateOfPayment.Id)
+                new MySqlParameter("id", serviceToApartment.Id)
             });
             Execute(command);
         }
 
-        public void RemoveTypeOfSettlement(CTypeOfSettlement typeOfSettlement)
-        {
-            var request = "DELETE FROM `Тип населённого пункта` WHERE id = @id";// TODO : see need change regist
-            var command = new MySqlCommand(request, m_connection);
-            command.Parameters.AddRange(new MySqlParameter[]{
-                new MySqlParameter("id", typeOfSettlement.Id)
-            });
-            Execute(command);
-        }
-
-        public void RemoveService(CService service)
-        {
-            var request = "DELETE FROM `услуги` WHERE id = @id";// TODO : see need change regist
-            var command = new MySqlCommand(request, m_connection);
-            command.Parameters.AddRange(new MySqlParameter[]{
-                new MySqlParameter("id", service.Id)
-            });
-            Execute(command);
-        }
         ////////////////////////////////////////////////
         public List<string> GetIdList(Table table)
         {
@@ -513,30 +424,14 @@ namespace CGW
                         result.Add(element.Id.ToString());
                     }
                     break;
-                case Table.RateOfPayment:
+                case Table.ServiceToApartment:
                     var databaseRateOfPayment = GetListOfRateOfPayment();
 
-                    foreach (CRateOfPayment element in databaseRateOfPayment)
+                    foreach (CServiceToApartment element in databaseRateOfPayment)
                     {
                         result.Add(element.Id.ToString());
                     }
-                    break;
-                case Table.TypeOfSettlement:
-                    var databaseTypeOfSettlement = GetListOfTypeOfSettlement();
-
-                    foreach (CTypeOfSettlement element in databaseTypeOfSettlement)
-                    {
-                        result.Add(element.Id.ToString());
-                    }
-                    break;
-                case Table.Service:
-                    var databaseService = GetListOfService();
-
-                    foreach (CService element in databaseService)
-                    {
-                        result.Add(element.Id.ToString());
-                    }
-                    break;
+                    break;                
                 default:
                     break;
             }

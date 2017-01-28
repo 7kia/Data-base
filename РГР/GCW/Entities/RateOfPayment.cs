@@ -2,30 +2,27 @@
 
 namespace GCW.Entities
 {
-    public class CRateOfPayment
+    public class CServiceToApartment
     {
-        public CRateOfPayment()
+        public CServiceToApartment()
         {
         }
-        public CRateOfPayment(MySqlDataReader reader)
+        public CServiceToApartment(MySqlDataReader reader)
         {
             Id = reader.GetUInt32(0);
-            IdRate = reader.GetUInt32(1);
-            IdPayment = reader.GetUInt32(2);
-            IsPaid = reader.GetBoolean(3);
+            IdApartment = reader.GetUInt32(1);
+            IdService = reader.GetUInt32(2);
         }
 
-        public CRateOfPayment(uint idRate, uint idPayment, bool isPaid)
+        public CServiceToApartment(uint idApartment, uint idService)
         {
-            IdRate = idRate;
-            IdPayment = idPayment;
-            IsPaid = isPaid;
+            IdApartment = idApartment;
+            IdService = idService;
         }
 
         public uint Id { get; set; }
-        public uint IdRate { get; set; }
-        public uint IdPayment { get; set; }
-        public bool IsPaid { get; set; }
+        public uint IdApartment { get; set; }
+        public uint IdService { get; set; }
 
     }
 }

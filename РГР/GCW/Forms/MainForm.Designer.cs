@@ -36,8 +36,6 @@
             this.оплатаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.тарифToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.тарифВПлатежеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.типНаселённогоПунктаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.услугиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактированиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,8 +61,8 @@
             this.сортировкаToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.menuStrip_MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_MainTable)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
@@ -102,9 +100,7 @@
             this.квартирыToolStripMenuItem,
             this.оплатаToolStripMenuItem,
             this.тарифToolStripMenuItem,
-            this.тарифВПлатежеToolStripMenuItem,
-            this.типНаселённогоПунктаToolStripMenuItem,
-            this.услугиToolStripMenuItem});
+            this.тарифВПлатежеToolStripMenuItem});
             this.SelectTableToolStripMenuItem.Name = "SelectTableToolStripMenuItem";
             this.SelectTableToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
             this.SelectTableToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
@@ -113,44 +109,30 @@
             // квартирыToolStripMenuItem
             // 
             this.квартирыToolStripMenuItem.Name = "квартирыToolStripMenuItem";
-            this.квартирыToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.квартирыToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.квартирыToolStripMenuItem.Text = "Квартиры";
             this.квартирыToolStripMenuItem.Click += new System.EventHandler(this.квартирыToolStripMenuItem_Click);
             // 
             // оплатаToolStripMenuItem
             // 
             this.оплатаToolStripMenuItem.Name = "оплатаToolStripMenuItem";
-            this.оплатаToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.оплатаToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.оплатаToolStripMenuItem.Text = "Оплата";
             this.оплатаToolStripMenuItem.Click += new System.EventHandler(this.оплатаToolStripMenuItem_Click);
             // 
             // тарифToolStripMenuItem
             // 
             this.тарифToolStripMenuItem.Name = "тарифToolStripMenuItem";
-            this.тарифToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.тарифToolStripMenuItem.Text = "Тариф";
-            this.тарифToolStripMenuItem.Click += new System.EventHandler(this.тарифToolStripMenuItem_Click);
+            this.тарифToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.тарифToolStripMenuItem.Text = "Тарифы услуг ";
+            this.тарифToolStripMenuItem.Click += new System.EventHandler(this.тарифУслугToolStripMenuItem_Click);
             // 
             // тарифВПлатежеToolStripMenuItem
             // 
             this.тарифВПлатежеToolStripMenuItem.Name = "тарифВПлатежеToolStripMenuItem";
-            this.тарифВПлатежеToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.тарифВПлатежеToolStripMenuItem.Text = "Тариф в платеже";
-            this.тарифВПлатежеToolStripMenuItem.Click += new System.EventHandler(this.тарифВПлатежеToolStripMenuItem_Click);
-            // 
-            // типНаселённогоПунктаToolStripMenuItem
-            // 
-            this.типНаселённогоПунктаToolStripMenuItem.Name = "типНаселённогоПунктаToolStripMenuItem";
-            this.типНаселённогоПунктаToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.типНаселённогоПунктаToolStripMenuItem.Text = "Тип населённого пункта";
-            this.типНаселённогоПунктаToolStripMenuItem.Click += new System.EventHandler(this.типНаселённогоПунктаToolStripMenuItem_Click);
-            // 
-            // услугиToolStripMenuItem
-            // 
-            this.услугиToolStripMenuItem.Name = "услугиToolStripMenuItem";
-            this.услугиToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.услугиToolStripMenuItem.Text = "Услуги";
-            this.услугиToolStripMenuItem.Click += new System.EventHandler(this.услугиToolStripMenuItem_Click);
+            this.тарифВПлатежеToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.тарифВПлатежеToolStripMenuItem.Text = "Услуги в квартире";
+            this.тарифВПлатежеToolStripMenuItem.Click += new System.EventHandler(this.услугиВКвартиреToolStripMenuItem_Click);
             // 
             // AboutToolStripMenuItem
             // 
@@ -181,34 +163,34 @@
             // добавитьToolStripMenuItem
             // 
             this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
-            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.добавитьToolStripMenuItem.Text = "Добавить";
             this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.добавитьToolStripMenuItem_Click);
             // 
             // изменитьToolStripMenuItem
             // 
             this.изменитьToolStripMenuItem.Name = "изменитьToolStripMenuItem";
-            this.изменитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.изменитьToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.изменитьToolStripMenuItem.Text = "Изменить";
             this.изменитьToolStripMenuItem.Click += new System.EventHandler(this.изменитьToolStripMenuItem_Click);
             // 
             // удалитьToolStripMenuItem
             // 
             this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
-            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.удалитьToolStripMenuItem.Text = "Удалить";
             this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.удалитьToolStripMenuItem_Click);
             // 
             // поискToolStripMenuItem
             // 
             this.поискToolStripMenuItem.Name = "поискToolStripMenuItem";
-            this.поискToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.поискToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.поискToolStripMenuItem.Text = "Поиск";
             // 
             // сортировкаToolStripMenuItem
             // 
             this.сортировкаToolStripMenuItem.Name = "сортировкаToolStripMenuItem";
-            this.сортировкаToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.сортировкаToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.сортировкаToolStripMenuItem.Text = "Сортировка";
             // 
             // dataGridView_MainTable
@@ -340,6 +322,14 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 6);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(786, 271);
+            this.dataGridView1.TabIndex = 0;
+            // 
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -349,14 +339,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 6);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(786, 271);
-            this.dataGridView1.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -392,8 +374,6 @@
         private System.Windows.Forms.ToolStripMenuItem оплатаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem тарифToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem тарифВПлатежеToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem типНаселённогоПунктаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem услугиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
 
