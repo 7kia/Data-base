@@ -69,9 +69,7 @@
     <Compile Include="Entities\Apartments.cs" />
     <Compile Include="Entities\Payment.cs" />
     <Compile Include="Entities\Rate.cs" />
-    <Compile Include="Entities\RateOfPayment.cs" />
-    <Compile Include="Entities\Service.cs" />
-    <Compile Include="Entities\TypeOfSettlement.cs" />
+    <Compile Include="Entities\ServiceToApartment.cs" />
     <Compile Include="Forms\ApartmentForm.cs">
       <SubType>Form</SubType>
     </Compile>

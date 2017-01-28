@@ -53,7 +53,7 @@ namespace GCW.Forms
                     FillRateTable(m_mySqlWrapper.GetListOfRate(filter, include, orderBy));
                     break;
                 case Table.ServiceToApartment:
-                    FillRateOfPaymentTable(m_mySqlWrapper.GetListOfRateOfPayment(filter, include, orderBy));
+                    FillRateOfPaymentTable(m_mySqlWrapper.GetListOfServiceToApartment(filter, include, orderBy));
                     break;
             }
         }
@@ -66,12 +66,6 @@ namespace GCW.Forms
         ///////////////////////////////////////////////////////////////////
         /// Filling tables
 
-        private void FillServiceTable(IEnumerable<CService> service)
-        {
-            dataGridView_MainTable.DataSource = service;
-            dataGridView_MainTable.Columns[0].HeaderText = "Id";
-            dataGridView_MainTable.Columns[1].HeaderText = "Название";
-        }
 
         private void FillApartmentsTable(IEnumerable<CApartments> apartments)
         {
@@ -103,12 +97,6 @@ namespace GCW.Forms
             dataGridView_MainTable.Columns[0].HeaderText = "Id";
             dataGridView_MainTable.Columns[1].HeaderText = "Id квартиры";
             dataGridView_MainTable.Columns[2].HeaderText = "Id услуги";
-        }
-        private void FillTypeOfSettlementTable(IEnumerable<CTypeOfSettlement> typeOfSettlement)
-        {
-            dataGridView_MainTable.DataSource = typeOfSettlement;
-            dataGridView_MainTable.Columns[0].HeaderText = "Id";
-            dataGridView_MainTable.Columns[1].HeaderText = "Название";
         }
 
         ///////////////////////////////////////////////////////////////////
@@ -245,7 +233,7 @@ namespace GCW.Forms
                     break;
                 case Table.ServiceToApartment:
                     var recordRateOfPayment = dataGridView_MainTable.CurrentRow.DataBoundItem as CServiceToApartment;
-                    m_mySqlWrapper.RemoveRateOfPayment(recordRateOfPayment);
+                    m_mySqlWrapper.RemoveServiceToApartment(recordRateOfPayment);
                     FillMainTable();
                     break;
             }
