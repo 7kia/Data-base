@@ -34,25 +34,31 @@ namespace GCW.Forms
 
         private void FillFields()
         {
-            var idRates = m_mySqlWrapper.GetIdList(Table.Apartments);
-            foreach (var element in idRates)
-            {
-                comboBoxApartment.Items.Add(element);
-            }
-
             textNumber.Text = m_payment.NumberPayment.ToString();
+            textSum.Text = m_payment.Sum.ToString();
         }
 
         private bool CheckFields()
         {
-            if (comboBoxApartment.Text.Length == 0)
-            {
-                MessageBox.Show("Заполните поле \"Id квартиры\"", "Ошибка");
-                return false;
-            }
             if (textNumber.Text.Length == 0)
             {
                 MessageBox.Show("Заполните поле \"Номер платежа\"", "Ошибка");
+                return false;
+            }
+
+            /*// TODO : check data
+                          if (monthCalendar.TodayDate. == 0)
+            {
+                MessageBox.Show("Заполните поле \"Номер платежа\"", "Ошибка");
+                return false;
+            }
+
+             */
+
+
+            if (textSum.Text.Length == 0)
+            {
+                MessageBox.Show("Заполните поле \"Сумма\"", "Ошибка");
                 return false;
             }
             
@@ -64,8 +70,9 @@ namespace GCW.Forms
             if (!CheckFields())
                 return;
 
-            m_payment.IdApartments = uint.Parse(comboBoxApartment.Text);
             m_payment.NumberPayment = uint.Parse(textNumber.Text);
+            m_payment.Data = monthCalendar.TodayDate.Date;
+            m_payment.Sum = uint.Parse(textSum.Text);
 
             if (m_create)
             {
@@ -79,5 +86,6 @@ namespace GCW.Forms
             this.DialogResult = DialogResult.OK;
             Close();
         }
+
     }
 }

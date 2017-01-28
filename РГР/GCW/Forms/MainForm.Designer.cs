@@ -47,7 +47,6 @@
             this.поискToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сортировкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView_MainTable = new System.Windows.Forms.DataGridView();
-            this.dataGridView_DependentTable = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -62,11 +61,17 @@
             this.удалитьToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.поискToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.сортировкаToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.menuStrip_MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_MainTable)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_DependentTable)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.contextMenuStripDependent.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip_MainMenu
@@ -214,14 +219,6 @@
             this.dataGridView_MainTable.Size = new System.Drawing.Size(789, 205);
             this.dataGridView_MainTable.TabIndex = 7;
             // 
-            // dataGridView_DependentTable
-            // 
-            this.dataGridView_DependentTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_DependentTable.Location = new System.Drawing.Point(22, 322);
-            this.dataGridView_DependentTable.Name = "dataGridView_DependentTable";
-            this.dataGridView_DependentTable.Size = new System.Drawing.Size(789, 265);
-            this.dataGridView_DependentTable.TabIndex = 8;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -234,7 +231,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 306);
+            this.label2.Location = new System.Drawing.Point(22, 300);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(108, 13);
             this.label2.TabIndex = 10;
@@ -322,14 +319,53 @@
             this.сортировкаToolStripMenuItem2.Size = new System.Drawing.Size(140, 22);
             this.сортировкаToolStripMenuItem2.Text = "Сортировка";
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(25, 316);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(806, 309);
+            this.tabControl1.TabIndex = 11;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.dataGridView1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(798, 283);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(798, 283);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 6);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(786, 271);
+            this.dataGridView1.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(843, 637);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView_DependentTable);
             this.Controls.Add(this.dataGridView_MainTable);
             this.Controls.Add(this.menuStrip_MainMenu);
             this.Name = "MainForm";
@@ -337,9 +373,11 @@
             this.menuStrip_MainMenu.ResumeLayout(false);
             this.menuStrip_MainMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_MainTable)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_DependentTable)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             this.contextMenuStripDependent.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -366,7 +404,6 @@
         private System.Windows.Forms.ToolStripMenuItem поискToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сортировкаToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridView_MainTable;
-        private System.Windows.Forms.DataGridView dataGridView_DependentTable;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
@@ -381,5 +418,9 @@
         private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem поискToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem сортировкаToolStripMenuItem2;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }

@@ -10,18 +10,21 @@ namespace GCW.Entities
         public CPayment(MySqlDataReader reader)
         {
             Id = reader.GetUInt32(0);
-            IdApartments = reader.GetUInt32(1);
-            NumberPayment = reader.GetUInt32(2);
+            NumberPayment = reader.GetUInt32(1);
+            Data = reader.GetDateTime(2);
+            Sum = reader.GetUInt32(3);
         }
 
-        public CPayment(uint idService, uint idApartments, uint numberPayment)
+        public CPayment(uint numberPayment, System.DateTime data, uint sum)
         {
-            IdApartments = idApartments;
             NumberPayment = NumberPayment;
+            Data = data;
+            Sum = sum;
         }
 
         public uint Id { get; set; }
-        public uint IdApartments { get; set; }
         public uint NumberPayment { get; set; }
+        public System.DateTime Data { get; set; }
+        public uint Sum { get; set; }
     }
 }

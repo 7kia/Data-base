@@ -33,7 +33,6 @@ namespace GCW.Forms
 
             // initialize context menu
             dataGridView_MainTable.ContextMenuStrip = contextMenuStrip;
-            dataGridView_DependentTable.ContextMenuStrip = contextMenuStripDependent;
 
             FillMainTable();
             FillDependentTable();

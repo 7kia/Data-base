@@ -317,19 +317,20 @@ namespace CGW
         {
             var request = "INSERT INTO `оплата`" +
               "(" +
-              "`Id квартиры`, `Номер платежа`" +
+              "`Номер платежа`, `Дата`, `Сумма`" +
               ") " +
               "VALUES " +
               "(" +
-              "@IdКвартиры,@номер" +
+              "@номер,@дата,@сумма" +
               ")";
 
             var command = new MySqlCommand(request, m_connection);
 
             command.Parameters.AddRange(new MySqlParameter[]
             {
-                new MySqlParameter("IdКвартиры", payment.IdApartments),
                 new MySqlParameter("номер", payment.NumberPayment),
+                new MySqlParameter("дата", payment.Data),
+                new MySqlParameter("сумма", payment.Sum),
             }
             );
             Execute(command);
