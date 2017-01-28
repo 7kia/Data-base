@@ -7,17 +7,37 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.IO;
 using GCW.Entities;
+using CGW;
 
 namespace CGW
 {
     public enum Table// For future entities
     {
-        Apartments
+        Apartments  = 0
         , Payment
         , Rate
         , ServiceToApartment
     };
+
+
+    public class Names
+    {
+        NameTables()
+        {
+            tables = new List<KeyValuePair<Table, string>>()
+            {
+                new KeyValuePair<Table, string>(Table.Apartments, "`квартиры`"),
+                new KeyValuePair<Table, string>(Table.Payment, "`оплата`"),
+                new KeyValuePair<Table, string>(Table.Rate, "`тарифы услуг`"),
+                new KeyValuePair<Table, string>(Table.ServiceToApartment, "`услуги в квартире`"),
+            }
+        }
+
+        public List<KeyValuePair<Table, string>> tables;
+
+    };
     
+
     public class MySqlWrapper : IDisposable
     {
         // private members
@@ -88,11 +108,11 @@ namespace CGW
         /// @filter - ищем это значение
         /// @patternMatching - строка для сравнения с шаблоном
         /// @orderBy - столбцы со строками для сортировки(для ORDER BY
-        public IEnumerable<CService> GetListOfService(string filter = "", string patternMatching = "", string orderBy = "")
+        public IEnumerable<CService> GetListOfServiceToApartment(string filter = "", string patternMatching = "", string orderBy = "")
         {
             var list = new List<CService>();
             OpenConnection();
-            var request = "SELECT * FROM `услуги` ";
+            var request = "SELECT * FROM `услуги в квартире` ";
             /*
              Add code for filter, patternMatching, orderBy
              */
@@ -159,42 +179,6 @@ namespace CGW
             CloseConnection();
             return list;
         }
-
-        public IEnumerable<CServiceToApartment> GetListOfRateOfPayment(string filter = "", string patternMatching = "", string orderBy = "")
-        {
-            var list = new List<CServiceToApartment>();
-            OpenConnection();
-            var request = "SELECT * FROM `услуги в квартире` ";
-            /*
-             Add code for filter, patternMatching, orderBy
-             */
-
-
-            MySqlCommand cmd = new MySqlCommand(request, m_connection);
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-                list.Add(new CServiceToApartment(reader));
-            CloseConnection();
-            return list;
-        }
-
-        public IEnumerable<CTypeOfSettlement> GetListOfTypeOfSettlement(string filter = "", string patternMatching = "", string orderBy = "")
-        {
-            var list = new List<CTypeOfSettlement>();
-            OpenConnection();
-            var request = "SELECT * FROM `тип населённого пункта` ";
-            /*
-             Add code for filter, patternMatching, orderBy
-             */
-
-
-            MySqlCommand cmd = new MySqlCommand(request, m_connection);
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-                list.Add(new CTypeOfSettlement(reader));
-            CloseConnection();
-            return list;
-        }
         ////////////////////////////////////////////////
         ///  Update
         public void UpdateApartment(CApartments apartment)
@@ -214,12 +198,12 @@ namespace CGW
 
         public void UpdatePayment(CPayment payment)
         {
-            var request = "UPDATE `оплата` SET `Номер платежа` = @номер," +
-               " `Дата` = @дата, `Сумма` = @сумма WHERE id = @id";
+            var request = "UPDATE `оплата` SET `Номер платежа` = @номер, `Дата` = @дата, `Сумма` = @сумма WHERE id = @id";
             var command = new MySqlCommand(request, m_connection);
 
             command.Parameters.AddRange(new MySqlParameter[]
             {
+                new MySqlParameter("id", payment.Id),
                 new MySqlParameter("номер", payment.NumberPayment),
                 new MySqlParameter("дата", payment.Data),
                 new MySqlParameter("сумма", payment.Sum),
@@ -308,13 +292,13 @@ namespace CGW
 
         public void AddRate(CRate rate)
         {
-            var request = "INSERT INTO `тариф`" +
+            var request = "INSERT INTO `тарифы услуг`" +
                             "(" +
-                            "`Id услуги`, `Id типа населенного пункта`, `Тариф`" +
+                            "`Название тарифа`, `Тариф`" +
                             ") " +
                             "VALUES " +
                             "(" +
-                            "@IdУслуги,@IdПункта,@Тариф" +
+                            "@названиеТарифа,@Тариф" +
                             ")";
 
             var command = new MySqlCommand(request, m_connection);
@@ -375,24 +359,13 @@ namespace CGW
 
         public void RemoveRate(CRate rate)
         {
-            var request = "DELETE FROM `тариф` WHERE id = @id";
+            var request = "DELETE FROM `тарифы услуг` WHERE id = @id";
             var command = new MySqlCommand(request, m_connection);
             command.Parameters.AddRange(new MySqlParameter[]{
                 new MySqlParameter("id", rate.Id)
             });
             Execute(command);
         }
-
-        public void RemoveRateOfPayment(CServiceToApartment serviceToApartment)
-        {
-            var request = "DELETE FROM `тарифы услуг` WHERE id = @id";
-            var command = new MySqlCommand(request, m_connection);
-            command.Parameters.AddRange(new MySqlParameter[]{
-                new MySqlParameter("id", serviceToApartment.Id)
-            });
-            Execute(command);
-        }
-
         ////////////////////////////////////////////////
         public List<string> GetIdList(Table table)
         {
@@ -438,6 +411,20 @@ namespace CGW
             
             return result;
         }
+
+        public List<string> GetNumberPaymentList()
+        {
+            List<string> result = new List<string>();
+            var databasePayment = GetListOfPayment();
+
+            foreach (CPayment element in databasePayment)
+            {
+                result.Add(element.NumberPayment.ToString());
+            }
+
+            return result;
+        }
+
 
         private void Execute(MySqlCommand command)
         {

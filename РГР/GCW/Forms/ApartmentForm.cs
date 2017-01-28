@@ -34,13 +34,13 @@ namespace GCW.Forms
 
         private void FillFields()
         {
-            var idRates = m_mySqlWrapper.GetIdList(Table.Payment);
-            foreach (var element in idRates)
+            var idPaymentNumber = m_mySqlWrapper.GetNumberPaymentList();
+            foreach (var element in idPaymentNumber)
             {
                 comboBoxPaymentNumber.Items.Add(element);
             }
 
-            textBoxAddress.Text = m_apartments.Address.ToString();
+            textBoxAddress.Text = m_apartments.Address;
         }
 
         private bool CheckFields()
