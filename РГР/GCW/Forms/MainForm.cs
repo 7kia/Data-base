@@ -263,7 +263,13 @@ namespace GCW.Forms
                     break;
                 case Table.Rate:
                     {
-
+                        {
+                            var form = new RateFiltrationForm();
+                            if (form.ShowDialog() == DialogResult.OK)
+                            {
+                                FillMainTable(form.filter, form.include, form.orderBy);
+                            }
+                        }
                     }
                     break;
                 case Table.ServiceToApartment:

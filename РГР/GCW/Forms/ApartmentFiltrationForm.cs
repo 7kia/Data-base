@@ -78,7 +78,6 @@ namespace GCW.Forms
 
             this.DialogResult = DialogResult.OK;
             Close();
-
         }
 
         private bool CheckFields()
