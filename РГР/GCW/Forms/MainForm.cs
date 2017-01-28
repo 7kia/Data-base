@@ -263,18 +263,20 @@ namespace GCW.Forms
                     break;
                 case Table.Rate:
                     {
+                        var form = new RateFiltrationForm();
+                        if (form.ShowDialog() == DialogResult.OK)
                         {
-                            var form = new RateFiltrationForm();
-                            if (form.ShowDialog() == DialogResult.OK)
-                            {
-                                FillMainTable(form.filter, form.include, form.orderBy);
-                            }
+                            FillMainTable(form.filter, form.include, form.orderBy);
                         }
                     }
                     break;
                 case Table.ServiceToApartment:
                     {
-
+                        var form = new ServiceToApartmentFiltrarion(m_mySqlWrapper.m_connection);
+                        if (form.ShowDialog() == DialogResult.OK)
+                        {
+                            FillMainTable(form.filter, form.include, form.orderBy);
+                        }
                     }
                     break;
             }

@@ -38,55 +38,109 @@ namespace CGW
     };
     */
 
-    public class MySqlWrapper : IDisposable
+    public class GetterWrapper
     {
-        // private members
+        public MySqlConnection m_connection;
+        public string m_source { get; set; }
 
-        private const string m_source = "Database=GCW;Data Source=127.0.0.1;User Id={0};Password={1}";
-        private MySqlConnection m_connection;
-
-        // public methods
-
-        public MySqlWrapper()
+        public GetterWrapper()
         {
-            var settings = Settings.Instance;
-            string source = string.Format(m_source, settings.Login, settings.Password);
-            m_connection = new MySqlConnection(source);
+            m_connection = new MySqlConnection();
+            m_source = "Database=GCW;Data Source=127.0.0.1;User Id={0};Password={1}";
+        }
 
+        public GetterWrapper(MySqlConnection connection)
+        {
+            m_connection = connection;
+            m_source = "Database=GCW;Data Source=127.0.0.1;User Id={0};Password={1}";
+        }
+
+        public List<string> GetIdList(Table table)
+        {
+            List<string> result = new List<string>();
+
+            switch (table)
+            {
+                case Table.Apartments:
+                    var databaseApartments = GetListOfApartments();
+
+                    foreach (CApartments element in databaseApartments)
+                    {
+                        result.Add(element.Id.ToString());
+                    }
+                    break;
+                case Table.Payment:
+                    var databasePayment = GetListOfPayment();
+
+                    foreach (CPayment element in databasePayment)
+                    {
+                        result.Add(element.Id.ToString());
+                    }
+                    break;
+                case Table.Rate:
+                    var databaseRate = GetListOfRate();
+
+                    foreach (CRate element in databaseRate)
+                    {
+                        result.Add(element.Id.ToString());
+                    }
+                    break;
+                case Table.ServiceToApartment:
+                    var databaseRateOfPayment = GetListOfServiceToApartment();
+
+                    foreach (CServiceToApartment element in databaseRateOfPayment)
+                    {
+                        result.Add(element.Id.ToString());
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            return result;
+        }
+
+        public List<string> GetNumberPaymentAsStringList()
+        {
+            List<string> result = new List<string>();
+            var databasePayment = GetListOfPayment();
+
+            foreach (CPayment element in databasePayment)
+            {
+                result.Add(element.NumberPayment.ToString());
+            }
+
+            return result;
+        }
+
+        public List<uint> GetNumberPaymentList()
+        {
+            List<uint> result = new List<uint>();
+            var databasePayment = GetListOfPayment();
+
+            foreach (CPayment element in databasePayment)
+            {
+                result.Add(element.NumberPayment);
+            }
+
+            return result;
+        }
+
+
+        protected void OpenConnection()
+        {
             try
             {
                 m_connection.Open();
-                m_connection.Close();
             }
-            catch (System.Exception e)
-            {
-                MessageBox.Show(e.Message, "Execute error");
-            }        
-        }
-
-        ~MySqlWrapper()
-        {
-        }
-
-        public void Dispose()
-        {
-            m_connection.Dispose();
-        }
-        
-        private void OpenConnection()
-        {
-            try
-            {
-                m_connection.Open();
-            }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("Connection failed");
                 MessageBox.Show(e.Message, "Connection");
             }
         }
 
-        private void CloseConnection()
+        protected void CloseConnection()
         {
             try
             {
@@ -113,9 +167,11 @@ namespace CGW
             var list = new List<CServiceToApartment>();
             OpenConnection();
             var request = "SELECT * FROM `услуги в квартире` ";
-            /*
-             Add code for filter, patternMatching, orderBy
-             */
+
+            if (filter.Length != 0 && patternMatching.Length != 0)
+            {
+                request += string.Format("where `{0}` = {1} ", filter, patternMatching);
+            }
 
             if (columnsForSorting.Length != 0)
                 request += "order by " + "`" + columnsForSorting + "`"; ;
@@ -178,7 +234,7 @@ namespace CGW
             }
 
             if (columnsForSorting.Length != 0)
-                request += "order by " +"`" + columnsForSorting + "`"; ;
+                request += "order by " + "`" + columnsForSorting + "`"; ;
 
 
             MySqlCommand cmd = new MySqlCommand(request, m_connection);
@@ -218,6 +274,41 @@ namespace CGW
             CloseConnection();
             return list;
         }
+
+    };
+
+    public class MySqlWrapper : GetterWrapper, IDisposable
+    {
+        // private members
+
+        // public methods
+
+        public MySqlWrapper()
+        {
+            var settings = Settings.Instance;
+            string source = string.Format(m_source, settings.Login, settings.Password);
+            m_connection = new MySqlConnection(source);
+
+            try
+            {
+                m_connection.Open();
+                m_connection.Close();
+            }
+            catch (System.Exception e)
+            {
+                MessageBox.Show(e.Message, "Execute error");
+            }        
+        }
+
+        ~MySqlWrapper()
+        {
+        }
+
+        public void Dispose()
+        {
+            m_connection.Dispose();
+        }
+        
         ////////////////////////////////////////////////
         ///  Update
         public void UpdateApartment(CApartments apartment)
@@ -417,77 +508,6 @@ namespace CGW
         }
 
         ////////////////////////////////////////////////
-        public List<string> GetIdList(Table table)
-        {
-            List<string> result = new List<string>();
-
-            switch (table)
-            {
-                case Table.Apartments:
-                    var databaseApartments = GetListOfApartments();
-
-                    foreach (CApartments element in databaseApartments)
-                    {
-                        result.Add(element.Id.ToString());
-                    }
-                    break;
-                case Table.Payment:
-                    var databasePayment = GetListOfPayment();
-
-                    foreach (CPayment element in databasePayment)
-                    {
-                        result.Add(element.Id.ToString());
-                    }
-                    break;
-                case Table.Rate:
-                    var databaseRate = GetListOfRate();
-
-                    foreach (CRate element in databaseRate)
-                    {
-                        result.Add(element.Id.ToString());
-                    }
-                    break;
-                case Table.ServiceToApartment:
-                    var databaseRateOfPayment = GetListOfServiceToApartment();
-
-                    foreach (CServiceToApartment element in databaseRateOfPayment)
-                    {
-                        result.Add(element.Id.ToString());
-                    }
-                    break;                
-                default:
-                    break;
-            }
-            
-            return result;
-        }
-
-        public List<string> GetNumberPaymentAsStringList()
-        {
-            List<string> result = new List<string>();
-            var databasePayment = GetListOfPayment();
-
-            foreach (CPayment element in databasePayment)
-            {
-                result.Add(element.NumberPayment.ToString());
-            }
-
-            return result;
-        }
-
-        public List<uint> GetNumberPaymentList()
-        {
-            List<uint> result = new List<uint>();
-            var databasePayment = GetListOfPayment();
-
-            foreach (CPayment element in databasePayment)
-            {
-                result.Add(element.NumberPayment);
-            }
-
-            return result;
-        }
-
         private void Execute(MySqlCommand command)
         {
             try

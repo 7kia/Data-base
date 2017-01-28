@@ -122,6 +122,12 @@
     <Compile Include="Forms\ServiceToApartment.Designer.cs">
       <DependentUpon>ServiceToApartment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ServiceToApartmentFiltrarion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ServiceToApartmentFiltrarion.Designer.cs">
+      <DependentUpon>ServiceToApartmentFiltrarion.cs</DependentUpon>
+    </Compile>
     <Compile Include="MySqlWrapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,6 +160,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ServiceToApartment.resx">
       <DependentUpon>ServiceToApartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ServiceToApartmentFiltrarion.resx">
+      <DependentUpon>ServiceToApartmentFiltrarion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
