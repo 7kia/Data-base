@@ -108,7 +108,7 @@ namespace CGW
         /// @filter - ищем это значение
         /// @patternMatching - строка для сравнения с шаблоном
         /// @orderBy - столбцы со строками для сортировки(для ORDER BY
-        public IEnumerable<CServiceToApartment> GetListOfServiceToApartment(string filter = "", string patternMatching = "", string orderBy = "")
+        public IEnumerable<CServiceToApartment> GetListOfServiceToApartment(string filter = "", string patternMatching = "", string columnsForSorting = "")
         {
             var list = new List<CServiceToApartment>();
             OpenConnection();
@@ -116,7 +116,9 @@ namespace CGW
             /*
              Add code for filter, patternMatching, orderBy
              */
-           
+
+            if (columnsForSorting.Length != 0)
+                request += "order by " + "`" + columnsForSorting + "`"; ;
 
             MySqlCommand cmd = new MySqlCommand(request, m_connection);
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -126,14 +128,27 @@ namespace CGW
             return list;
         }
 
-        public IEnumerable<CApartments> GetListOfApartments(string filter = "", string patternMatching = "", string orderBy = "")
+        public IEnumerable<CApartments> GetListOfApartments(string filter = "", string patternMatching = "", string columnsForSorting = "")
         {
             var list = new List<CApartments>();
             OpenConnection();
             var request = "SELECT * FROM `квартиры` ";
-            /*
-             Add code for filter, patternMatching, orderBy
-             */
+
+
+            if (filter.Length != 0 && patternMatching.Length != 0)
+            {
+                if (filter == "Адрес")
+                {
+                    request += string.Format("where `{0}` = '{1}\' ", filter, patternMatching);
+                }
+                else
+                {
+                    request += string.Format("where `{0}` = {1} ", filter, patternMatching);
+                }
+            }
+
+            if (columnsForSorting.Length != 0)
+                request += "order by " + "`" + columnsForSorting + "`";
 
 
             MySqlCommand cmd = new MySqlCommand(request, m_connection);
@@ -144,7 +159,7 @@ namespace CGW
             return list;
         }
 
-        public IEnumerable<CPayment> GetListOfPayment(string filter = "", string patternMatching = "", string orderBy = "")
+        public IEnumerable<CPayment> GetListOfPayment(string filter = "", string patternMatching = "", string columnsForSorting = "")
         {
             var list = new List<CPayment>();
             OpenConnection();
@@ -152,6 +167,8 @@ namespace CGW
             /*
              Add code for filter, patternMatching, orderBy
              */
+            if (columnsForSorting.Length != 0)
+                request += "order by " +"`" + columnsForSorting + "`"; ;
 
 
             MySqlCommand cmd = new MySqlCommand(request, m_connection);
@@ -162,7 +179,7 @@ namespace CGW
             return list;
         }
 
-        public IEnumerable<CRate> GetListOfRate(string filter = "", string patternMatching = "", string orderBy = "")
+        public IEnumerable<CRate> GetListOfRate(string filter = "", string patternMatching = "", string columnsForSorting = "")
         {
             var list = new List<CRate>();
             OpenConnection();
@@ -170,6 +187,8 @@ namespace CGW
             /*
              Add code for filter, patternMatching, orderBy
              */
+            if (columnsForSorting.Length != 0)
+                request += "order by " + "`" + columnsForSorting + "`";
 
 
             MySqlCommand cmd = new MySqlCommand(request, m_connection);

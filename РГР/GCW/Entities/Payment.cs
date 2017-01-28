@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using System.Windows.Forms;
 
 namespace GCW.Entities
 {
@@ -22,9 +23,29 @@ namespace GCW.Entities
             Sum = sum;
         }
 
+        public bool IsCorrectNumberPaymentFormat(string text)
+        {
+            if (text.Length != LENGTH_NUMBER)
+            {
+                MessageBox.Show(string.Format("Длина \"Номер платежа\" должна быть равна {0}", LENGTH_NUMBER), "Ошибка");
+                return false;
+            }
+
+            uint res;
+            if (!uint.TryParse(text, out res))
+            {
+                MessageBox.Show("В поле \"Номер платежа\" должно быть положительное целое число", "Ошибка");
+                return false;
+            }
+
+            return true;
+        }
+
         public uint Id { get; set; }
         public uint NumberPayment { get; set; }
         public System.DateTime Data { get; set; }
         public uint Sum { get; set; }
+
+        public const uint LENGTH_NUMBER = 10;
     }
 }

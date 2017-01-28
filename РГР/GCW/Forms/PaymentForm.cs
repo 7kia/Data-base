@@ -45,15 +45,8 @@ namespace GCW.Forms
                 MessageBox.Show("Заполните поле \"Номер платежа\"", "Ошибка");
                 return false;
             }
-            if (textNumber.Text.Length != 10)
+            if(!m_payment.IsCorrectNumberPaymentFormat(textNumber.Text))
             {
-                MessageBox.Show("Длина Номера платежа должна быть равна 10", "Ошибка");
-                return false;
-            }
-            uint res;
-            if (!uint.TryParse(textNumber.Text, out res))
-            {
-                MessageBox.Show("В поле \"Номер платежа\" должно быть положительное целое число", "Ошибка");
                 return false;
             }
 
@@ -63,10 +56,10 @@ namespace GCW.Forms
                 MessageBox.Show("В календаре нужно выбрать только один день", "Ошибка");
                 return false;
             }
-             
-           
 
 
+
+            uint res;
             if (textSum.Text.Length == 0)
             {
                 MessageBox.Show("Заполните поле \"Сумма\"", "Ошибка");

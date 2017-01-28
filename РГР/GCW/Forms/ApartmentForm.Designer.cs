@@ -31,7 +31,7 @@
             this.textBoxAddress = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonOk = new System.Windows.Forms.Button();
             this.comboBoxPaymentNumber = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -60,15 +60,15 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Номер платежа";
             // 
-            // button1
+            // buttonOk
             // 
-            this.button1.Location = new System.Drawing.Point(80, 147);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Ok";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonOk.Location = new System.Drawing.Point(80, 147);
+            this.buttonOk.Name = "buttonOk";
+            this.buttonOk.Size = new System.Drawing.Size(75, 23);
+            this.buttonOk.TabIndex = 4;
+            this.buttonOk.Text = "Ok";
+            this.buttonOk.UseVisualStyleBackColor = true;
+            this.buttonOk.Click += new System.EventHandler(this.button1_Click);
             // 
             // comboBoxPaymentNumber
             // 
@@ -85,7 +85,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(240, 207);
             this.Controls.Add(this.comboBoxPaymentNumber);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxAddress);
@@ -100,7 +100,7 @@
         private System.Windows.Forms.TextBox textBoxAddress;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.ComboBox comboBoxPaymentNumber;
     }
 }

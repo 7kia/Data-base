@@ -238,6 +238,37 @@ namespace GCW.Forms
                     break;
             }
         }
+
+        private void сортировкаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            switch(m_currentMainTable)
+            {
+                case Table.Apartments:
+                    {
+                        var form = new ApartmentFiltrationForm();
+                        if (form.ShowDialog() == DialogResult.OK)
+                        {
+                            FillMainTable(form.filter, form.include, form.orderBy);
+                        }
+                    }
+                    break;
+                case Table.Payment:
+                    {
+
+                    }
+                    break;
+                case Table.Rate:
+                    {
+
+                    }
+                    break;
+                case Table.ServiceToApartment:
+                    {
+
+                    }
+                    break;
+            }
+        }
         ///////////////////////////////////////////////////////////////////
 
     }
