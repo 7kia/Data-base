@@ -79,8 +79,8 @@ namespace GCW.Forms
         {
             dataGridView_MainTable.DataSource = payment;
             dataGridView_MainTable.Columns[0].HeaderText = "Id";
-            dataGridView_MainTable.Columns[1].HeaderText = "Id квартиры";
-            dataGridView_MainTable.Columns[2].HeaderText = "Номер платежа";
+            dataGridView_MainTable.Columns[1].HeaderText = "Номер платежа";
+            dataGridView_MainTable.Columns[2].HeaderText = "Дата";
             dataGridView_MainTable.Columns[3].HeaderText = "Сумма";
 
         }
@@ -254,7 +254,11 @@ namespace GCW.Forms
                     break;
                 case Table.Payment:
                     {
-
+                        var form = new PaymentFiltrationForm();
+                        if (form.ShowDialog() == DialogResult.OK)
+                        {
+                            FillMainTable(form.filter, form.include, form.orderBy);
+                        }
                     }
                     break;
                 case Table.Rate:

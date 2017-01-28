@@ -164,9 +164,19 @@ namespace CGW
             var list = new List<CPayment>();
             OpenConnection();
             var request = "SELECT * FROM `оплата` ";
-            /*
-             Add code for filter, patternMatching, orderBy
-             */
+
+            if (filter.Length != 0 && patternMatching.Length != 0)
+            {
+                if (filter == "Дата")
+                {
+                    request += string.Format("where `{0}` = '{1}\' ", filter, patternMatching);
+                }
+                else
+                {
+                    request += string.Format("where `{0}` = {1} ", filter, patternMatching);
+                }
+            }
+
             if (columnsForSorting.Length != 0)
                 request += "order by " +"`" + columnsForSorting + "`"; ;
 

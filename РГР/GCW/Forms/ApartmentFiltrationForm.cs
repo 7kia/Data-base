@@ -30,7 +30,6 @@ namespace GCW.Forms
 
             radioSearchAddressButton.Checked = false;
             radioSearchNumberPaymentButton.Checked = false;
-
         }
 
         private void radioAddressButton_CheckedChanged(object sender, EventArgs e)
