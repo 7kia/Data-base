@@ -33,11 +33,14 @@
             this.textBoxRate = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxNameRate = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.LogoTextBox = new System.Windows.Forms.TextBox();
+            this.SeeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(67, 129);
+            this.button1.Location = new System.Drawing.Point(76, 180);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 13;
@@ -48,7 +51,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(81, 76);
+            this.label3.Location = new System.Drawing.Point(100, 59);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 15;
@@ -56,7 +59,7 @@
             // 
             // textBoxRate
             // 
-            this.textBoxRate.Location = new System.Drawing.Point(29, 92);
+            this.textBoxRate.Location = new System.Drawing.Point(48, 75);
             this.textBoxRate.Name = "textBoxRate";
             this.textBoxRate.Size = new System.Drawing.Size(142, 20);
             this.textBoxRate.TabIndex = 14;
@@ -64,7 +67,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(54, 37);
+            this.label1.Location = new System.Drawing.Point(73, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 17;
@@ -72,16 +75,47 @@
             // 
             // textBoxNameRate
             // 
-            this.textBoxNameRate.Location = new System.Drawing.Point(29, 53);
+            this.textBoxNameRate.Location = new System.Drawing.Point(48, 36);
             this.textBoxNameRate.Name = "textBoxNameRate";
             this.textBoxNameRate.Size = new System.Drawing.Size(142, 20);
             this.textBoxNameRate.TabIndex = 16;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(73, 98);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(84, 13);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Logo кампании";
+            // 
+            // LogoTextBox
+            // 
+            this.LogoTextBox.Location = new System.Drawing.Point(48, 114);
+            this.LogoTextBox.Name = "LogoTextBox";
+            this.LogoTextBox.Size = new System.Drawing.Size(142, 20);
+            this.LogoTextBox.TabIndex = 22;
+            this.LogoTextBox.TextChanged += new System.EventHandler(this.LogoTextBox_TextChanged);
+            this.LogoTextBox.DoubleClick += new System.EventHandler(this.LogoTextBox_Click);
+            // 
+            // SeeButton
+            // 
+            this.SeeButton.Location = new System.Drawing.Point(76, 140);
+            this.SeeButton.Name = "SeeButton";
+            this.SeeButton.Size = new System.Drawing.Size(88, 23);
+            this.SeeButton.TabIndex = 23;
+            this.SeeButton.Text = "Посмотреть";
+            this.SeeButton.UseVisualStyleBackColor = true;
+            this.SeeButton.Click += new System.EventHandler(this.seeButton_Click);
             // 
             // RateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(207, 186);
+            this.ClientSize = new System.Drawing.Size(246, 215);
+            this.Controls.Add(this.SeeButton);
+            this.Controls.Add(this.LogoTextBox);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxNameRate);
             this.Controls.Add(this.label3);
@@ -101,5 +135,8 @@
         private System.Windows.Forms.TextBox textBoxRate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxNameRate;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox LogoTextBox;
+        private System.Windows.Forms.Button SeeButton;
     }
 }

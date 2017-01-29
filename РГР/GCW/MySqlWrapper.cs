@@ -345,7 +345,7 @@ namespace CGW
         public void UpdateRate(CRate rate)
         {
             var request = "UPDATE `тарифы услуг` SET `Название тарифа` = @названиеТарифа," +
-                "`Тариф` = @Тариф WHERE id = @id";
+                "`Тариф` = @Тариф, `Logo кампании` = @Logo WHERE id = @id";
             var command = new MySqlCommand(request, m_connection);
 
             command.Parameters.AddRange(new MySqlParameter[]
@@ -353,6 +353,7 @@ namespace CGW
                 new MySqlParameter("id", rate.Id),
                 new MySqlParameter("названиеТарифа", rate.NameRate),
                 new MySqlParameter("Тариф", rate.Rate),
+                new MySqlParameter("Logo", rate.PathLogo),
             }
             );
             Execute(command);
@@ -424,11 +425,11 @@ namespace CGW
         {
             var request = "INSERT INTO `тарифы услуг`" +
                             "(" +
-                            "`Название тарифа`, `Тариф`" +
+                            "`Название тарифа`, `Тариф`, `Logo кампании`" +
                             ") " +
                             "VALUES " +
                             "(" +
-                            "@названиеТарифа,@Тариф" +
+                            "@названиеТарифа,@Тариф,@Logo" +
                             ")";
 
             var command = new MySqlCommand(request, m_connection);
@@ -437,6 +438,7 @@ namespace CGW
             {
                 new MySqlParameter("названиеТарифа", rate.NameRate),
                 new MySqlParameter("Тариф", rate.Rate),
+                new MySqlParameter("Logo", rate.PathLogo),
             }
             );
             Execute(command);
