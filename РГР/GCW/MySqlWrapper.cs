@@ -229,9 +229,7 @@ namespace CGW
         {
             var list = new List<CServiceToApartment>();
             OpenConnection();
-            string request;
-
-            request = "SELECT * FROM `услуги в квартире` ";     
+            string request = string.Format("SELECT * FROM `{0}`", tableNames[(int)Table.ServiceToApartment]);     
 
             if ((filter.Length != 0) && (patternMatching.Length != 0))
             {
@@ -260,7 +258,7 @@ namespace CGW
         {
             var list = new List<CApartments>();
             OpenConnection();
-            var request = "SELECT * FROM `квартиры` ";
+            var request = string.Format("SELECT * FROM `{0}`", tableNames[(int)Table.Apartments]);
 
 
             if (filter.Length != 0 && patternMatching.Length != 0)
@@ -296,7 +294,7 @@ namespace CGW
         {
             var list = new List<CPayment>();
             OpenConnection();
-            var request = "SELECT * FROM `оплата` ";
+            var request = string.Format("SELECT * FROM `{0}`", tableNames[(int)Table.Payment]);
 
             if (filter.Length != 0 && patternMatching.Length != 0)
             {
@@ -330,7 +328,7 @@ namespace CGW
         {
             var list = new List<CRate>();
             OpenConnection();
-            var request = "SELECT * FROM `тарифы услуг` ";
+            var request = string.Format("SELECT * FROM `{0}`", tableNames[(int)Table.Rate]);
 
             if (filter.Length != 0 && patternMatching.Length != 0)
             {
@@ -394,7 +392,9 @@ namespace CGW
         ///  Update
         public void UpdateApartment(CApartments apartment)
         {
-            var request = "UPDATE `квартиры` SET `Адрес` = @адрес, `Номер платежа` = @номер WHERE id = @id";
+            var request = string.Format("UPDATE `{0}` SET `Адрес` = @адрес, `Номер платежа` = @номер WHERE id = @id"
+                , tableNames[(int)Table.Apartments]);
+
             var command = new MySqlCommand(request, m_connection);
 
             command.Parameters.AddRange(new MySqlParameter[]
@@ -409,7 +409,8 @@ namespace CGW
 
         public void UpdatePayment(CPayment payment)
         {
-            var request = "UPDATE `оплата` SET `Номер платежа` = @номер, `Дата` = @дата, `Сумма` = @сумма WHERE id = @id";
+            var request = string.Format("UPDATE `{0}` SET `Номер платежа` = @номер, `Дата` = @дата, `Сумма` = @сумма WHERE id = @id"        
+                , tableNames[(int)Table.Payment]);
             var command = new MySqlCommand(request, m_connection);
 
             command.Parameters.AddRange(new MySqlParameter[]
@@ -425,8 +426,11 @@ namespace CGW
 
         public void UpdateRate(CRate rate)
         {
-            var request = "UPDATE `тарифы услуг` SET `Название тарифа` = @названиеТарифа," +
-                "`Тариф` = @Тариф, `Logo кампании` = @Logo WHERE id = @id";
+            var request = string.Format("UPDATE `{0}` SET `Название тарифа` = @названиеТарифа," +
+                "`Тариф` = @Тариф, `Logo кампании` = @Logo WHERE id = @id"
+                , tableNames[(int)Table.Rate]);
+
+
             var command = new MySqlCommand(request, m_connection);
 
             command.Parameters.AddRange(new MySqlParameter[]
@@ -442,8 +446,10 @@ namespace CGW
 
         public void UpdateServiceToApartment(CServiceToApartment rateOfPayment)
         {
-            var request = "UPDATE `услуги в квартире` SET " +
-                          " `Id квартиры` = @Idквартиры, `Id услуги` = @Idуслуги WHERE id = @id";
+            var request = string.Format("UPDATE `{0}` SET " +
+                          " `Id квартиры` = @Idквартиры, `Id услуги` = @Idуслуги WHERE id = @id"
+               , tableNames[(int)Table.ServiceToApartment]);
+
             var command = new MySqlCommand(request, m_connection);
 
             command.Parameters.AddRange(new MySqlParameter[]
@@ -460,15 +466,17 @@ namespace CGW
         /// Add
         public void AddApartment(CApartments apartment)
         {
-            var request = "INSERT INTO `квартиры`" +
+            var request = string.Format("INSERT INTO `{0}`" +
                           "(" +
                           "`Адрес`, `Номер платежа`" +
                           ") " +
                           "VALUES " +
                           "(" +
                           "@адрес,@номер" +
-                          ")";
-            var command = new MySqlCommand(request, m_connection);
+                          ")"
+                          , tableNames[(int)Table.Apartments]);
+
+           var command = new MySqlCommand(request, m_connection);
 
             command.Parameters.AddRange(new MySqlParameter[]
             {
@@ -481,14 +489,15 @@ namespace CGW
 
         public void AddPayment(CPayment payment)
         {
-            var request = "INSERT INTO `оплата`" +
+            var request = string.Format("INSERT INTO `{0}`" +
               "(" +
               "`Номер платежа`, `Дата`, `Сумма`" +
               ") " +
               "VALUES " +
               "(" +
               "@номер,@дата,@сумма" +
-              ")";
+              ")"
+               , tableNames[(int)Table.Payment]);
 
             var command = new MySqlCommand(request, m_connection);
 
@@ -504,14 +513,15 @@ namespace CGW
 
         public void AddRate(CRate rate)
         {
-            var request = "INSERT INTO `тарифы услуг`" +
+            var request = string.Format("INSERT INTO `{0}`" +
                             "(" +
                             "`Название тарифа`, `Тариф`, `Logo кампании`" +
                             ") " +
                             "VALUES " +
                             "(" +
                             "@названиеТарифа,@Тариф,@Logo" +
-                            ")";
+                            ")"
+                             , tableNames[(int)Table.Rate]);
 
             var command = new MySqlCommand(request, m_connection);
 
@@ -527,14 +537,15 @@ namespace CGW
 
         public void AddServiceToApartment(CServiceToApartment rateOfPayment)
         {
-            var request = "INSERT INTO `услуги в квартире`" +
+            var request = string.Format("INSERT INTO `{0}`" +
                 "(" +
                 "`Id квартиры`, `Id услуги`" +
                 ") " +
                 "VALUES " +
                 "(" +
                 "@Idквартиры,@Idуслуги" +
-                ")";
+                ")"
+                 , tableNames[(int)Table.ServiceToApartment]);
 
 
             var command = new MySqlCommand(request, m_connection);
@@ -552,7 +563,7 @@ namespace CGW
         /// Remove
         public void RemoveApartment(CApartments apartment)
         {
-            var request = "DELETE FROM `квартиры` WHERE id = @id";
+            var request = string.Format("DELETE FROM `{0}` WHERE id = @id", tableNames[(int)Table.Apartments]);
             var command = new MySqlCommand(request, m_connection);
             command.Parameters.AddRange(new MySqlParameter[]{
                 new MySqlParameter("id", apartment.Id)
@@ -562,7 +573,7 @@ namespace CGW
 
         public void RemovePayment(CPayment payment)
         {
-            var request = "DELETE FROM `оплата` WHERE id = @id";
+            var request = string.Format("DELETE FROM `{0}` WHERE id = @id", tableNames[(int)Table.Payment]);
             var command = new MySqlCommand(request, m_connection);
             command.Parameters.AddRange(new MySqlParameter[]{
                 new MySqlParameter("id", payment.Id)
@@ -572,7 +583,7 @@ namespace CGW
 
         public void RemoveRate(CRate rate)
         {
-            var request = "DELETE FROM `тарифы услуг` WHERE id = @id";
+            var request = string.Format("DELETE FROM `{0}` WHERE id = @id", tableNames[(int)Table.Rate]); ;
             var command = new MySqlCommand(request, m_connection);
             command.Parameters.AddRange(new MySqlParameter[]{
                 new MySqlParameter("id", rate.Id)
@@ -582,7 +593,7 @@ namespace CGW
 
         public void RemoveServiceToApartment(CServiceToApartment serviceToApartment)
         {
-            var request = "DELETE FROM `услуги в квартире` WHERE id = @id";
+            var request = string.Format("DELETE FROM `{0}` WHERE id = @id", tableNames[(int)Table.ServiceToApartment]); ;
             var command = new MySqlCommand(request, m_connection);
             command.Parameters.AddRange(new MySqlParameter[]{
                 new MySqlParameter("id", serviceToApartment.Id)
