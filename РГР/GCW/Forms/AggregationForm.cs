@@ -17,6 +17,7 @@ namespace GCW.Forms
         private Table m_type;
         private MySqlWrapper m_mySqlWrapper;
 
+
         private List<string> tableNames = new List<string>()
         {
             "квартиры"
@@ -33,13 +34,13 @@ namespace GCW.Forms
 
         private List<string> apratmentColumns = new List<string>()
         {
-            "`Адрес`"
-            , "`Номер платежа`"
+            "`Номер платежа`"
         };
 
         private List<string> paymentColumns = new List<string>()
         {
-            "`Дата`"
+            "`Номер платежа`"
+            , "`Дата`"
             , "`Сумма`"
         };
 
@@ -138,11 +139,11 @@ namespace GCW.Forms
                 DateTime typeDate = new DateTime();
                 if(resultType.Equals(1.GetType()))
                 {
-                    MessageBox.Show(string.Format("Рузультат = {0}", reader.GetUInt32(0)));
+                    MessageBox.Show(string.Format("Результат = {0}", reader.GetUInt32(0)));
                 }
                 else if (resultType.Equals(typeDate.GetType()))
                 {
-                    MessageBox.Show(string.Format("Рузультат = {0}", reader.GetDateTime(0)));
+                    MessageBox.Show(string.Format("Результат = {0}", reader.GetDateTime(0)));
                 }
             }
             m_mySqlWrapper.CloseConnection();

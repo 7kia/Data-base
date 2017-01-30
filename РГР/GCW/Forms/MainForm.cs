@@ -16,6 +16,30 @@ namespace GCW.Forms
     public partial class MainForm : Form
     {
         // private members
+        private List<string> tableNames = new List<string>()
+        {
+            "`квартиры`"
+            , "`оплата`"
+            , "`тарифы услуг`"
+            , "`услуги в квартире`"
+        };
+
+        public List<Table> childApratmentColumns = new List<Table>()
+        {
+            Table.ServiceToApartment
+        };
+        public List<Table> childPaymentColumns = new List<Table>()
+        {
+            Table.Apartments
+        };
+        public List<Table> childRateColumns = new List<Table>()
+        {
+             Table.ServiceToApartment
+        };
+        public List<Table> childServiceToApartmentColumns = new List<Table>()
+        {
+        };
+
         private MySqlWrapper m_mySqlWrapper;
         private Table m_currentMainTable;
 
@@ -41,6 +65,8 @@ namespace GCW.Forms
         ///////////////////////////////////////////////////////////////////
         private void FillMainTable(string filter = "", string include = "", string orderBy = "", string aggregationFunction = "")
         {
+            dataGridView_MainTable.DataSource = null;
+
             switch (m_currentMainTable)
             {
                 case Table.Apartments:
@@ -64,16 +90,51 @@ namespace GCW.Forms
 
         private void FillDependentTable(string filter = "", string include = "", string orderBy = "")
         {
-            // TODO : see need it, check correctness     
+            switch (m_currentMainTable)
+            {
+                case Table.Apartments:
+                    FillDependTables(childApratmentColumns, filter, include, orderBy);
+                    break;
+                case Table.Payment:
+                    FillDependTables(childPaymentColumns, filter, include, orderBy);
+                    break;
+                case Table.Rate:
+                    FillDependTables(childRateColumns, filter, include, orderBy);
+                    break;
+                case Table.ServiceToApartment:
+                    FillDependTables(childServiceToApartmentColumns, filter, include, orderBy);
+                    break;
+            }
         }
 
         ///////////////////////////////////////////////////////////////////
         /// Filling tables
+        private void FillDependTables(List<Table> dependTables, string filter = "", string include = "", string orderBy = "")
+        {
+            dataGridView_DependTable.DataSource = null;
+            if (dependTables.Count != 0)
+            {
+                switch (dependTables[0])
+                {
+                    case Table.Apartments:
+                        FillDependApartmentsTable(m_mySqlWrapper.GetListOfApartments(filter, include, orderBy));
+                        break;
+                    case Table.Payment:
+                        FillDependPaymentTable(m_mySqlWrapper.GetListOfPayment(filter, include, orderBy));
+                        break;
+                    case Table.Rate:
+                        FillDependRateTable(m_mySqlWrapper.GetListOfRate(filter, include, orderBy));
+                        break;
+                    case Table.ServiceToApartment:
+                        FillDependRateOfPaymentTable(m_mySqlWrapper.GetListOfServiceToApartment(filter, include, orderBy));
+                        break;
+                }
+            }
 
+        }
 
         private void FillApartmentsTable(IEnumerable<CApartments> apartments)
         {
-
             dataGridView_MainTable.DataSource = apartments;
             dataGridView_MainTable.Columns[0].HeaderText = "Id";
             dataGridView_MainTable.Columns[1].HeaderText = "Адрес";
@@ -86,7 +147,6 @@ namespace GCW.Forms
             dataGridView_MainTable.Columns[1].HeaderText = "Номер платежа";
             dataGridView_MainTable.Columns[2].HeaderText = "Дата";
             dataGridView_MainTable.Columns[3].HeaderText = "Сумма";
-
         }
         private void FillRateTable(IEnumerable<CRate> rate)
         {
@@ -103,6 +163,36 @@ namespace GCW.Forms
             dataGridView_MainTable.Columns[2].HeaderText = "Id услуги";
         }
 
+        private void FillDependApartmentsTable(IEnumerable<CApartments> apartments)
+        {
+            dataGridView_DependTable.DataSource = apartments;
+            dataGridView_DependTable.Columns[0].HeaderText = "Id";
+            dataGridView_DependTable.Columns[1].HeaderText = "Адрес";
+            dataGridView_DependTable.Columns[2].HeaderText = "Номер платежа";
+        }
+        private void FillDependPaymentTable(IEnumerable<CPayment> payment)
+        {
+            dataGridView_DependTable.DataSource = payment;
+            dataGridView_DependTable.Columns[0].HeaderText = "Id";
+            dataGridView_DependTable.Columns[1].HeaderText = "Номер платежа";
+            dataGridView_DependTable.Columns[2].HeaderText = "Дата";
+            dataGridView_DependTable.Columns[3].HeaderText = "Сумма";
+
+        }
+        private void FillDependRateTable(IEnumerable<CRate> rate)
+        {
+            dataGridView_DependTable.DataSource = rate;
+            dataGridView_DependTable.Columns[0].HeaderText = "Id";
+            dataGridView_DependTable.Columns[1].HeaderText = "Название тарифа";
+            dataGridView_DependTable.Columns[2].HeaderText = "Тариф";
+        }
+        private void FillDependRateOfPaymentTable(IEnumerable<CServiceToApartment> rateOfPayment)
+        {
+            dataGridView_DependTable.DataSource = rateOfPayment;
+            dataGridView_DependTable.Columns[0].HeaderText = "Id";
+            dataGridView_DependTable.Columns[1].HeaderText = "Id квартиры";
+            dataGridView_DependTable.Columns[2].HeaderText = "Id услуги";
+        }
         ///////////////////////////////////////////////////////////////////
         /// ToolStripMenuItem_Click
         private void услугиВКвартиреToolStripMenuItem_Click(object sender, EventArgs e)

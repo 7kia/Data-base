@@ -37,9 +37,66 @@ namespace CGW
 
     };
     */
+    
+
 
     public class GetterWrapper
     {
+        // TODO : do refactoring replace `<construction>` to name tables
+        public List<string> tableNames = new List<string>()
+        {
+            "квартиры"
+            , "оплата"
+            , "тарифы услуг"
+            , "услуги в квартире"
+        };
+
+        public List<string> apratmentColumns = new List<string>()
+        {
+            "`Id`"
+            , "`Адрес`"
+            , "`Номер платежа`"
+        };
+        public List<string> dependApratmentColumns = new List<string>()
+        {
+            "`Номер платежа`"
+        };
+
+        public List<string> paymentColumns = new List<string>()
+        {
+            "`Id`"
+            , "`Номер платежа`"
+            , "`Дата`"
+            , "`Сумма`"
+        };
+        public List<string> dependPaymentColumns = new List<string>()
+        {
+        };
+
+        public List<string> rateColumns = new List<string>()
+        {
+            "`Id`"
+            , "`Название тарифа`"
+            , "`Тариф`"
+            , "`Logo кампании`"
+        };
+        public List<string> depenRateColumns = new List<string>()
+        {
+        };
+
+
+        public List<string> serviceToApartmentColumns = new List<string>()
+        {
+            "`Id`"
+            ,"`Id квартиры`"
+            ,"`Id услуги`"
+        };
+        public List<string> dependServiceToApartmentColumns = new List<string>()
+        {
+            "`Id квартиры`"
+            ,"`Id услуги`"
+        };
+
         public MySqlConnection m_connection;
         public string m_source { get; set; }
 
