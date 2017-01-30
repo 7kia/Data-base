@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textSearchBox = new System.Windows.Forms.TextBox();
             this.radioSearchIdServiceButton = new System.Windows.Forms.RadioButton();
             this.radioSearchIdApartmentButton = new System.Windows.Forms.RadioButton();
             this.buttonOk = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.radioIdServiceButton = new System.Windows.Forms.RadioButton();
             this.radioIdApartmentButton = new System.Windows.Forms.RadioButton();
-            this.textSearchBox = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -51,6 +51,13 @@
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Поиск";
+            // 
+            // textSearchBox
+            // 
+            this.textSearchBox.Location = new System.Drawing.Point(24, 61);
+            this.textSearchBox.Name = "textSearchBox";
+            this.textSearchBox.Size = new System.Drawing.Size(217, 20);
+            this.textSearchBox.TabIndex = 15;
             // 
             // radioSearchIdServiceButton
             // 
@@ -78,7 +85,7 @@
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(103, 226);
+            this.buttonOk.Location = new System.Drawing.Point(108, 226);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 13;
@@ -121,18 +128,11 @@
             this.radioIdApartmentButton.UseVisualStyleBackColor = true;
             this.radioIdApartmentButton.CheckedChanged += new System.EventHandler(this.radioIdApartmentButton_CheckedChanged);
             // 
-            // textSearchBox
-            // 
-            this.textSearchBox.Location = new System.Drawing.Point(24, 61);
-            this.textSearchBox.Name = "textSearchBox";
-            this.textSearchBox.Size = new System.Drawing.Size(217, 20);
-            this.textSearchBox.TabIndex = 15;
-            // 
             // ServiceToApartmentFiltrarion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(284, 258);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.groupBox1);

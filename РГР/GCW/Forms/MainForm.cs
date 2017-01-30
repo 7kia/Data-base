@@ -39,7 +39,7 @@ namespace GCW.Forms
         }
 
         ///////////////////////////////////////////////////////////////////
-        private void FillMainTable(string filter = "", string include = "", string orderBy = "")
+        private void FillMainTable(string filter = "", string include = "", string orderBy = "", string aggregationFunction = "")
         {
             switch (m_currentMainTable)
             {
@@ -57,6 +57,10 @@ namespace GCW.Forms
                     break;
             }
         }
+
+        ////////////////////////////////////////////////
+        // Compute parametrs
+        //public void 
 
         private void FillDependentTable(string filter = "", string include = "", string orderBy = "")
         {
@@ -275,10 +279,18 @@ namespace GCW.Forms
                         var form = new ServiceToApartmentFiltrarion(m_mySqlWrapper.m_connection);
                         if (form.ShowDialog() == DialogResult.OK)
                         {
-                            FillMainTable(form.filter, form.include, form.orderBy);
+                            FillMainTable(form.filter, form.include, form.orderBy, form.aggregationFunction);
                         }
                     }
                     break;
+            }
+        }
+
+        private void функцииАгрегацииToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new AggregationForm(m_currentMainTable, m_mySqlWrapper);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
             }
         }
         ///////////////////////////////////////////////////////////////////

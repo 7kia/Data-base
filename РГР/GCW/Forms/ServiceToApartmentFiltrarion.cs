@@ -17,12 +17,16 @@ namespace GCW.Forms
         public string filter { get; set; }
         public string include { get; set; }
         public string orderBy { get; set; }
+        public string aggregationFunction { get; set; }
 
         public ServiceToApartmentFiltrarion(MySqlConnection connection)
         {
             InitializeComponent();
 
             filter = "";
+            include = "";
+            orderBy = "";
+            aggregationFunction = "";
         }
 
         private void radioIdApartmentButton_CheckedChanged(object sender, EventArgs e)

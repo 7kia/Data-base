@@ -127,7 +127,7 @@ namespace CGW
         }
 
 
-        protected void OpenConnection()
+        public void OpenConnection()
         {
             try
             {
@@ -140,7 +140,7 @@ namespace CGW
             }
         }
 
-        protected void CloseConnection()
+        public void CloseConnection()
         {
             try
             {
@@ -161,30 +161,45 @@ namespace CGW
         /// 
         /// @filter - ищем это значение
         /// @patternMatching - строка для сравнения с шаблоном
-        /// @orderBy - столбцы со строками для сортировки(для ORDER BY
-        public IEnumerable<CServiceToApartment> GetListOfServiceToApartment(string filter = "", string patternMatching = "", string columnsForSorting = "")
+        /// @columnsForSorting - столбцы со строками для сортировки(для ORDER BY
+        /// @aggregationFunction - функция агрегации(min, max ...
+        /// @columnsForSearch - колонка в которой искать, нужна для @aggregationFunction
+        public IEnumerable<CServiceToApartment> GetListOfServiceToApartment(
+              string filter = ""
+            , string patternMatching = ""
+            , string columnsForSorting = ""
+            )
         {
             var list = new List<CServiceToApartment>();
             OpenConnection();
-            var request = "SELECT * FROM `услуги в квартире` ";
+            string request;
 
-            if (filter.Length != 0 && patternMatching.Length != 0)
+            request = "SELECT * FROM `услуги в квартире` ";     
+
+            if ((filter.Length != 0) && (patternMatching.Length != 0))
             {
                 request += string.Format("where `{0}` = {1} ", filter, patternMatching);
             }
-
-            if (columnsForSorting.Length != 0)
-                request += "order by " + "`" + columnsForSorting + "`"; ;
+            else if((columnsForSorting.Length != 0))
+            {
+                request += string.Format("order by `{0}`", columnsForSorting);
+            }           
 
             MySqlCommand cmd = new MySqlCommand(request, m_connection);
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
+            {
                 list.Add(new CServiceToApartment(reader));
+            }
             CloseConnection();
             return list;
         }
 
-        public IEnumerable<CApartments> GetListOfApartments(string filter = "", string patternMatching = "", string columnsForSorting = "")
+        public IEnumerable<CApartments> GetListOfApartments(
+              string filter = ""
+            , string patternMatching = ""
+            , string columnsForSorting = ""
+            )
         {
             var list = new List<CApartments>();
             OpenConnection();
@@ -215,7 +230,12 @@ namespace CGW
             return list;
         }
 
-        public IEnumerable<CPayment> GetListOfPayment(string filter = "", string patternMatching = "", string columnsForSorting = "")
+        public IEnumerable<CPayment> 
+            GetListOfPayment(
+              string filter = ""
+            , string patternMatching = ""
+            , string columnsForSorting = ""
+            )
         {
             var list = new List<CPayment>();
             OpenConnection();
@@ -245,7 +265,11 @@ namespace CGW
             return list;
         }
 
-        public IEnumerable<CRate> GetListOfRate(string filter = "", string patternMatching = "", string columnsForSorting = "")
+        public IEnumerable<CRate> GetListOfRate(
+              string filter = ""
+            , string patternMatching = ""
+            , string columnsForSorting = ""
+            )
         {
             var list = new List<CRate>();
             OpenConnection();
@@ -508,7 +532,6 @@ namespace CGW
             });
             Execute(command);
         }
-
         ////////////////////////////////////////////////
         private void Execute(MySqlCommand command)
         {
