@@ -149,6 +149,16 @@ namespace GCW.Forms
             {
                 Image img = Image.FromFile(LogoTextBox.Text);
             }
+            catch (OutOfMemoryException exception)
+            {
+                MessageBox.Show("Не достаточно памяти для \"logo кампании\", возможно картинка слишком большая", "Ошибка");
+                return;
+            }
+            catch (ArgumentException exception)
+            {
+                MessageBox.Show("Путь к \"logo кампании\" некорректен", "Ошибка");
+                return;
+            }
             catch (System.IO.FileNotFoundException exception)
             {
                 MessageBox.Show("Путь к \"logo кампании\" некорректен", "Ошибка");
