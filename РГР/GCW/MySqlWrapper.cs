@@ -19,27 +19,6 @@ namespace CGW
         , ServiceToApartment
     };
 
-    /*
-    public class Names
-    {
-        NameTables()
-        {
-            tables = new List<KeyValuePair<Table, string>>()
-            {
-                new KeyValuePair<Table, string>(Table.Apartments, "`квартиры`"),
-                new KeyValuePair<Table, string>(Table.Payment, "`оплата`"),
-                new KeyValuePair<Table, string>(Table.Rate, "`тарифы услуг`"),
-                new KeyValuePair<Table, string>(Table.ServiceToApartment, "`услуги в квартире`"),
-            }
-        }
-
-        public List<KeyValuePair<Table, string>> tables;
-
-    };
-    */
-    
-
-
     public class GetterWrapper
     {
         // TODO : do refactoring replace `<construction>` to name tables
